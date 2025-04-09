@@ -9,8 +9,8 @@ type Particle struct {
 }
 
 func ProcessCollision(a *Particle, b *Particle) {
-  if a.Pos.Dist(b.Pos) < a.Radius + b.Radius {
-    return
-  }
+	if a.Pos.Dist(b.Pos) < a.Radius+b.Radius {
+		return
+	}
 
 }

@@ -3,5 +3,5 @@ package container
 import "github.com/iv4n-t3a/fart-simulator/internal/particle"
 
 type Container interface {
-  ProcessCollision(*particle.Particle)
+	ProcessCollision(*particle.Particle)
 }
