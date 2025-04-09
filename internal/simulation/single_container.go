@@ -13,9 +13,9 @@ func (s *SingleContainerSimulation) Subscribe(obs Observer) {
 }
 
 func (s *SingleContainerSimulation) Run(time float64) {
-  for s.time < time {
-    dt := s.container.EvaluateTimeStep()
-    s.container.Simulate(dt)
-    time += dt
-  }
+	for s.time < time {
+		dt := s.container.EvaluateTimeStep()
+		s.container.Simulate(dt)
+		time += dt
+	}
 }

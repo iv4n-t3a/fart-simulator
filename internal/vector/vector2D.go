@@ -58,15 +58,15 @@ func (v Vector2D) Lenght() float64 {
 }
 
 func (v Vector2D) X() float64 {
-  return v.x
+	return v.x
 }
 
 func (v Vector2D) Y() float64 {
-  return v.y
+	return v.y
 }
 
 func (v Vector2D) Z() float64 {
-  panic("Trying to access Z in 2D vector")
+	panic("Trying to access Z in 2D vector")
 }
 
 func (v Vector2D) Dimensions() int {

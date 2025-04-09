@@ -71,7 +71,7 @@ func (v Vector3D) Y() float64 {
 }
 
 func (v Vector3D) Z() float64 {
-  return v.z
+	return v.z
 }
 
 func (v Vector3D) Dimensions() int {
@@ -85,8 +85,8 @@ func (v Vector3D) Dimension(i int) float64 {
 	if i == 1 {
 		return v.y
 	}
-  if i == 2 {
-    return v.z
-  }
+	if i == 2 {
+		return v.z
+	}
 	panic(fmt.Sprintf("Trying to access %d dimension on 2D vector", i))
 }
