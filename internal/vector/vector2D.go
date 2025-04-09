@@ -80,6 +80,10 @@ func (v Vector2D) Length() float64 {
 	return math.Sqrt(v.x*v.x + v.y*v.y)
 }
 
+func (v Vector2D) Dist(oth Vector) float64 {
+  return v.Sub(oth).Length()
+}
+
 func (v Vector2D) IsCollinear(oth Vector) bool {
 	if v.Dimensions() != oth.Dimensions() {
 		panic(fmt.Sprintf("Dimensions %d != %d", v.Dimensions(), oth.Dimensions()))
