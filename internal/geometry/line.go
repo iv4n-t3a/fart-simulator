@@ -2,6 +2,7 @@ package geometry
 
 import (
 	"fmt"
+	"math"
 
 	"github.com/iv4n-t3a/fart-simulator/internal/vector"
 )
@@ -31,5 +32,5 @@ func (l1 Line) Dist(l2 Line) float64 {
   }
   d := l1.Dir.CrossProd(l2.Dir)
   d = d.Normalized()
-  return d.DotProd(l1.Start) - d.DotProd(l2.Start)
+  return math.Abs(d.DotProd(l1.Start) - d.DotProd(l2.Start))
 }
