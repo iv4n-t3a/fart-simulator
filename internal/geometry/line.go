@@ -15,7 +15,7 @@ func NewLine(start vector.Vector, dir vector.Vector) Line {
   if start.Dimensions() != dir.Dimensions() {
     panic(fmt.Sprintf("Dimensions mismatch %d, %d", start.Dimensions(), dir.Dimensions()))
   }
-  if dir.Lenght() == 0.0 {
+  if dir.Length() == 0.0 {
     panic("Null dir vector")
   }
   return Line{Start: start, Dir: dir}
