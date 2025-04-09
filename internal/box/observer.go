@@ -1,4 +1,4 @@
-package container
+package box
 
 import "github.com/iv4n-t3a/fart-simulator/internal/particle"
 
