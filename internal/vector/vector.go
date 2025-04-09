@@ -10,6 +10,7 @@ type Vector interface {
 	Normalized() Vector
 	Length() float64
   Dist(Vector) float64
+	IsCollinear(Vector) bool
 
 	X() float64
 	Y() float64
