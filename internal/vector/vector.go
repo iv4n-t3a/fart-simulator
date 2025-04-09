@@ -9,6 +9,7 @@ type Vector interface {
 	CrossProd(Vector) Vector
 	Normalized() Vector
 	Length() float64
+	IsCollinear(Vector) bool
 
 	X() float64
 	Y() float64
