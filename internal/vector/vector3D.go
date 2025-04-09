@@ -86,6 +86,10 @@ func (v Vector3D) Length() float64 {
 	return math.Sqrt(v.x*v.x + v.y*v.y + v.z*v.z)
 }
 
+func (v Vector3D) Dist(oth Vector) float64 {
+  return v.Sub(oth).Length()
+}
+
 func (v Vector3D) X() float64 {
 	return v.x
 }
