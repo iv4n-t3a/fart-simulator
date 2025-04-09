@@ -2,6 +2,7 @@ package vector
 
 import (
 	"fmt"
+	"github.com/iv4n-t3a/fart-simulator/config"
 	"math"
 )
 
@@ -69,11 +70,23 @@ func (v Vector2D) CrossProd(oth Vector) Vector {
 }
 
 func (v Vector2D) Normalized() Vector {
+	if v.Length() == 0 {
+		return Vector2D{0, 0}
+	}
 	return v.Div(v.Length())
 }
 
 func (v Vector2D) Length() float64 {
 	return math.Sqrt(v.x*v.x + v.y*v.y)
+}
+
+func (v Vector2D) IsCollinear(oth Vector) bool {
+	if v.Dimensions() != oth.Dimensions() {
+		panic(fmt.Sprintf("Dimensions %d != %d", v.Dimensions(), oth.Dimensions()))
+	}
+	vNorm := v.Normalized()
+	othNorm := oth.Normalized()
+	return vNorm.Sub(othNorm).Length() < config.Eps || vNorm.Add(othNorm).Length() < config.Eps
 }
 
 func (v Vector2D) X() float64 {
