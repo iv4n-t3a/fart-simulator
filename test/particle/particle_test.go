@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestParticlesCollisition(t *testing.T) {
+func TestParticlesCollision(t *testing.T) {
 	p1 := particle.Particle{
 		Pos:    vector.NewVector3D(0.0, 0.0, 0.0),
 		Vel:    vector.NewVector3D(1.0, 1.0, 0.0),

@@ -122,11 +122,11 @@ func (v *Vector2D) Dimension(i int) float64 {
 func (v *Vector2D) SetDimension(val float64, i int) {
 	if i == 0 {
 		v.x = val
-    return
+		return
 	}
 	if i == 1 {
-    v.y = val
-    return
+		v.y = val
+		return
 	}
 	panic(fmt.Sprintf("Trying to access %d dimension on 2D vector", i))
 }
