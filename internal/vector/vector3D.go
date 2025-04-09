@@ -11,6 +11,14 @@ type Vector3D struct {
 	z float64
 }
 
+func NewVector3D(x float64, y float64, z float64) Vector {
+	return &Vector3D{
+		x: x,
+		y: y,
+    z: z,
+	}
+}
+
 func (v Vector3D) Add(oth Vector) Vector {
 	return Vector3D{
 		x: v.x + oth.X(),
