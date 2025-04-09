@@ -1,21 +1,21 @@
 package simulation
 
-import "github.com/iv4n-t3a/fart-simulator/internal/box"
+import "github.com/iv4n-t3a/fart-simulator/internal/chunk"
 
-type SingleBoxSimulation struct {
-	time      float64
-	container box.Chunk
-	observer  *Observer
+type SingleChunkSimulation struct {
+	time     float64
+	chunk    chunk.Chunk
+	observer *Observer
 }
 
-func (s *SingleBoxSimulation) Subscribe(obs *Observer) {
+func (s *SingleChunkSimulation) Subscribe(obs *Observer) {
 	s.observer = obs
 }
 
-func (s *SingleBoxSimulation) Run(time float64) {
+func (s *SingleChunkSimulation) Run(time float64) {
 	for s.time < time {
-		dt := s.container.EvaluateTimeStep()
-		s.container.Simulate(dt)
+		dt := s.chunk.EvaluateTimeStep()
+		s.chunk.Simulate(dt)
 		time += dt
 	}
 }
