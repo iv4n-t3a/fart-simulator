@@ -9,7 +9,7 @@ type Vector interface {
 	CrossProd(Vector) Vector
 	Normalized() Vector
 	Length() float64
-  Dist(Vector) float64
+	Dist(Vector) float64
 	IsCollinear(Vector) bool
 
 	X() float64
@@ -19,4 +19,5 @@ type Vector interface {
 	// kdtree.Point compatability
 	Dimensions() int
 	Dimension(i int) float64
+	SetDimension(float64, int)
 }

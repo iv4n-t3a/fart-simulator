@@ -6,4 +6,5 @@ type Observer interface {
 	ParticleInserted(*particle.Particle)
 	ParticleRemoved(*particle.Particle)
 	Collision(*particle.Particle, *particle.Particle)
+	CollisionWithContainer(*particle.Particle)
 }
