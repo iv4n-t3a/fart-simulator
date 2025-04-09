@@ -42,7 +42,7 @@ func velocityAfterCollision(a Particle, b Particle) vector.Vector {
 	)
 
 	if !ok {
-		panic("Equivalation is supposed to have solution")
+		panic("Equation is supposed to have solution")
 	}
 
   new_v1 := x1
