@@ -12,6 +12,9 @@ type Vector3D struct {
 }
 
 func (v Vector3D) Add(oth Vector) Vector {
+  if v.Dimensions() != oth.Dimensions() {
+    panic(fmt.Sprintf("Dimensions %d != %d", v.Dimensions(), oth.Dimensions()))
+  }
 	return Vector3D{
 		x: v.x + oth.X(),
 		y: v.y + oth.Y(),
@@ -20,6 +23,9 @@ func (v Vector3D) Add(oth Vector) Vector {
 }
 
 func (v Vector3D) Sub(oth Vector) Vector {
+  if v.Dimensions() != oth.Dimensions() {
+    panic(fmt.Sprintf("Dimensions %d != %d", v.Dimensions(), oth.Dimensions()))
+  }
 	return Vector3D{
 		x: v.x - oth.X(),
 		y: v.y - oth.Y(),
@@ -36,9 +42,6 @@ func (v Vector3D) Mul(num float64) Vector {
 }
 
 func (v Vector3D) Div(num float64) Vector {
-	if num == 0.0 {
-		panic("Dividing vector by zero")
-	}
 	return Vector3D{
 		x: v.x / num,
 		y: v.y / num,
@@ -47,10 +50,16 @@ func (v Vector3D) Div(num float64) Vector {
 }
 
 func (v Vector3D) DotProd(oth Vector) float64 {
+  if v.Dimensions() != oth.Dimensions() {
+    panic(fmt.Sprintf("Dimensions %d != %d", v.Dimensions(), oth.Dimensions()))
+  }
 	return v.x*oth.X() + v.y*oth.Y() + v.z*oth.Z()
 }
 
 func (v Vector3D) CrossProd(oth Vector) Vector {
+  if v.Dimensions() != oth.Dimensions() {
+    panic(fmt.Sprintf("Dimensions %d != %d", v.Dimensions(), oth.Dimensions()))
+  }
 	panic("Unimplemented")
 }
 

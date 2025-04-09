@@ -11,6 +11,9 @@ type Vector2D struct {
 }
 
 func (v Vector2D) Add(oth Vector) Vector {
+  if v.Dimensions() != oth.Dimensions() {
+    panic(fmt.Sprintf("Dimensions %d != %d", v.Dimensions(), oth.Dimensions()))
+  }
 	return Vector2D{
 		x: v.x + oth.X(),
 		y: v.y + oth.Y(),
@@ -18,6 +21,9 @@ func (v Vector2D) Add(oth Vector) Vector {
 }
 
 func (v Vector2D) Sub(oth Vector) Vector {
+  if v.Dimensions() != oth.Dimensions() {
+    panic(fmt.Sprintf("Dimensions %d != %d", v.Dimensions(), oth.Dimensions()))
+  }
 	return Vector2D{
 		x: v.x - oth.X(),
 		y: v.y - oth.Y(),
@@ -42,10 +48,16 @@ func (v Vector2D) Div(num float64) Vector {
 }
 
 func (v Vector2D) DotProd(oth Vector) float64 {
+  if v.Dimensions() != oth.Dimensions() {
+    panic(fmt.Sprintf("Dimensions %d != %d", v.Dimensions(), oth.Dimensions()))
+  }
 	return v.x*oth.X() + v.y*oth.Y()
 }
 
 func (v Vector2D) CrossProd(oth Vector) Vector {
+  if v.Dimensions() != oth.Dimensions() {
+    panic(fmt.Sprintf("Dimensions %d != %d", v.Dimensions(), oth.Dimensions()))
+  }
 	panic("Cross product is not supported for 2D")
 }
 
