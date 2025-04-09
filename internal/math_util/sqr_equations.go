@@ -7,20 +7,20 @@ import (
 )
 
 // Solves ax^2 + bx + c = 0
-func SolveSqrEquation(a float64, b float64, c float64) (*float64, *float64) {
+func SolveSqrEquation(a float64, b float64, c float64) (float64, float64, bool) {
 	d := Discriminant(a, b, c)
 
 	if math.Abs(d) <= config.Eps {
-		x := -(b + math.Sqrt(d)) / 2 / a
-		return &x, nil
+		x := -b / 2 / a
+		return x, x, true
 	}
 	if d < 0 {
-		return nil, nil
+		return 0.0, 0.0, false
 	}
 
 	x1 := -(b + math.Sqrt(d)) / 2 / a
 	x2 := -(b - math.Sqrt(d)) / 2 / a
-	return &x1, &x2
+	return x1, x2, true
 }
 
 func Discriminant(a float64, b float64, c float64) float64 {
