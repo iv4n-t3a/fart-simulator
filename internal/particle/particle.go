@@ -35,7 +35,7 @@ func velocityAfterCollision(a Particle, b Particle) vector.Vector {
 	// Solves the following system of equalations
 	// P = v1 * m1 + v2 * m2
 	// E = v1^2 * m1 / 2 + v2^2 * m2 / 2
-	x1, x2 := math_util.SolveSqrEquivaltion(
+	x1, x2 := math_util.SolveSqrEquation(
 		b.Mass+b.Mass*b.Mass/a.Mass/a.Mass,
 		2*b.Mass*sumImp/a.Mass,
 		sumImp*sumImp/a.Mass/a.Mass-2*sumEnergy,

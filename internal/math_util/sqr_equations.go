@@ -7,7 +7,7 @@ import (
 )
 
 // Solves ax^2 + bx + c = 0
-func SolveSqrEquivaltion(a float64, b float64, c float64) (*float64, *float64) {
+func SolveSqrEquation(a float64, b float64, c float64) (*float64, *float64) {
 	d := Discriminant(a, b, c)
 
 	if math.Abs(d) <= config.Eps {
