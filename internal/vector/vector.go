@@ -8,7 +8,7 @@ type Vector interface {
 	DotProd(Vector) float64
 	CrossProd(Vector) Vector
 	Normalized() Vector
-	Lenght() float64
+	Length() float64
 
 	X() float64
 	Y() float64

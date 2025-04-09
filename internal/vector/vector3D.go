@@ -68,10 +68,10 @@ func (v Vector3D) CrossProd(oth Vector) Vector {
 }
 
 func (v Vector3D) Normalized() Vector {
-	return v.Div(v.Lenght())
+	return v.Div(v.Length())
 }
 
-func (v Vector3D) Lenght() float64 {
+func (v Vector3D) Length() float64 {
 	return math.Sqrt(v.x*v.x + v.y*v.y + v.z*v.z)
 }
 
