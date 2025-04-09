@@ -1,5 +1,5 @@
 SOURCES := $(shell find . -type f -name *.go)
-TARGET := fart-simulator
+TARGET := simulator
 
 build: $(TARGET)
 
