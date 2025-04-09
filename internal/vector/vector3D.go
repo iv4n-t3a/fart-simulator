@@ -50,6 +50,9 @@ func (v Vector3D) Mul(num float64) Vector {
 }
 
 func (v Vector3D) Div(num float64) Vector {
+	if num == 0.0 {
+		panic("Dividing vector by zero")
+	}
 	return Vector3D{
 		x: v.x / num,
 		y: v.y / num,
