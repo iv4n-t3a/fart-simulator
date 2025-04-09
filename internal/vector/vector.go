@@ -19,4 +19,5 @@ type Vector interface {
 	// kdtree.Point compatability
 	Dimensions() int
 	Dimension(i int) float64
+  SetDimension(float64, int)
 }

@@ -9,6 +9,7 @@ type NaiveChunk struct {
 	dt        float64
 	particles []particle.Particle
 	container container.Container
+	observers []Observer
 }
 
 func NewNaiveChunk(dt float64) *NaiveChunk {
@@ -16,11 +17,14 @@ func NewNaiveChunk(dt float64) *NaiveChunk {
 }
 
 func (c *NaiveChunk) AddParticle(p particle.Particle) {
+	for i := range c.observers {
+		c.observers[i].ParticleInserted(&p)
+	}
 	c.particles = append(c.particles, p)
 }
 
-func (c *NaiveChunk) Subscribe(*Observer) {
-	panic("Unimplemented")
+func (c *NaiveChunk) Subscribe(obs Observer) {
+	c.observers = append(c.observers, obs)
 }
 
 func (c *NaiveChunk) Simulate(dt float64) {
@@ -31,9 +35,17 @@ func (c *NaiveChunk) Simulate(dt float64) {
 	}
 
 	for i := range c.particles {
-		c.container.ProcessCollision(&c.particles[i])
+		if c.container.ProcessCollision(&c.particles[i]) {
+			for i := range c.observers {
+				c.observers[i].CollisionWithContainer(&c.particles[i])
+			}
+		}
 		for j := range c.particles[i:] {
-			particle.ProcessCollision(&c.particles[i], &c.particles[j])
+			if particle.ProcessCollision(&c.particles[i], &c.particles[j]) {
+				for k := range c.observers {
+					c.observers[k].Collision(&c.particles[i], &c.particles[j])
+				}
+			}
 		}
 	}
 }
