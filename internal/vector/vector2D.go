@@ -10,6 +10,13 @@ type Vector2D struct {
 	y float64
 }
 
+func NewVector2D(x float64, y float64) Vector {
+	return &Vector2D{
+		x: x,
+		y: y,
+	}
+}
+
 func (v Vector2D) Add(oth Vector) Vector {
 	if v.Dimensions() != oth.Dimensions() {
 		panic(fmt.Sprintf("Dimensions %d != %d", v.Dimensions(), oth.Dimensions()))
