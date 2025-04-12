@@ -20,7 +20,7 @@ func NewSingleChunkSimulation(particlesAmount int, container container.Container
 	particles := make([]particle.Particle, particlesAmount)
 
 	for i := range particles {
-		particles[i] = (spawner.SpawnParticle())
+		particles[i] = spawner.SpawnParticle()
 	}
 	chunk := chunkFactory.NewChunk(container, particles)
 
