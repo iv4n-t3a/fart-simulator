@@ -16,8 +16,11 @@ type NaiveChunk struct {
 	collisionWithContainerObservers []observers.CollisionWithContainerObserver
 }
 
-func NewNaiveChunk(dt float64) *NaiveChunk {
-	return &NaiveChunk{dt: dt}
+func NewNaiveChunk(dt float64, container container.Container) *NaiveChunk {
+	return &NaiveChunk{
+		dt:        dt,
+		container: container,
+	}
 }
 
 func (c *NaiveChunk) AddParticle(p particle.Particle) {
@@ -25,6 +28,10 @@ func (c *NaiveChunk) AddParticle(p particle.Particle) {
 		c.particleInsertedObservers[i].ParticleInserted(&p)
 	}
 	c.particles = append(c.particles, p)
+}
+
+func (c *NaiveChunk) InitializeParticles(particles *[]particle.Particle) {
+	c.particles = *particles
 }
 
 func (c *NaiveChunk) SubscribeParticleInserted(obs observers.ParticleInsertedObserver) {
@@ -47,7 +54,7 @@ func (c *NaiveChunk) Simulate(dt float64) {
 	// Update positions
 	for i := range c.particles {
 		p := &c.particles[i]
-		p.Pos.Add(p.Vel.Mul(dt))
+		p.Pos = p.Pos.Add(p.Vel.Mul(dt))
 	}
 
 	for i := range c.particles {
