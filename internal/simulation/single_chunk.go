@@ -23,7 +23,7 @@ func NewSingleChunkSimulation(particlesAmount int, container container.Container
 	}
 
 	return &SingleChunkSimulation{
-		time:  0,
+		time:  0.0,
 		chunk: chunk,
 	}
 }

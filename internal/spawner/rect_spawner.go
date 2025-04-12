@@ -9,13 +9,14 @@ import (
 )
 
 type RectSpawner struct {
-	sides       []float64
 	maxVelocity float64
+	sides       []float64
 }
 
 func NewRectSpawner(maxVelocity float64, c container.RectContainer) Spawner {
 	return &RectSpawner{
-		sides: c.GetSides(),
+		maxVelocity: maxVelocity,
+		sides:       c.GetSides(),
 	}
 }
 
