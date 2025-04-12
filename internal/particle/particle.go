@@ -20,7 +20,7 @@ func (p Particle) Impulse() vector.Vector {
 	return p.Vel.Mul(p.Mass)
 }
 
-func (p Particle) KeeneticEnergy() float64 {
+func (p Particle) KineticEnergy() float64 {
 	return p.Vel.Length() * p.Vel.Length() * p.Mass / 2
 }
 

@@ -46,7 +46,7 @@ func TestParticlesCollisionStressSameMass(t *testing.T) {
 		}
 
 		sumImpulsesBefore := p1.Impulse().Add(p2.Impulse())
-		sumEnergyBefore := p1.KeeneticEnergy() + p2.KeeneticEnergy()
+		sumEnergyBefore := p1.KineticEnergy() + p2.KineticEnergy()
 		vel1Before := p1.Vel
 		vel2Before := p2.Vel
 
@@ -54,7 +54,7 @@ func TestParticlesCollisionStressSameMass(t *testing.T) {
 
 		assert.True(t, wasCollision, "No collision detected")
 		assert.InEpsilon(t, sumImpulsesBefore.Length(), p1.Impulse().Add(p2.Impulse()).Length(), config.Eps, "The law of conservation of impulse check")
-		assert.InEpsilon(t, sumEnergyBefore, p1.KeeneticEnergy()+p2.KeeneticEnergy(), config.Eps, "The law of conservation of energy check")
+		assert.InEpsilon(t, sumEnergyBefore, p1.KineticEnergy()+p2.KineticEnergy(), config.Eps, "The law of conservation of energy check")
 		assert.NotEqual(t, vel1Before, p1.Vel, "Velocity not changed")
 		assert.NotEqual(t, vel2Before, p2.Vel, "Velocity not changed")
 	}
@@ -77,7 +77,7 @@ func TestParticlesCollisionStress(t *testing.T) {
 		}
 
 		sumImpulsesBefore := p1.Impulse().Add(p2.Impulse())
-		sumEnergyBefore := p1.KeeneticEnergy() + p2.KeeneticEnergy()
+		sumEnergyBefore := p1.KineticEnergy() + p2.KineticEnergy()
 		vel1Before := p1.Vel
 		vel2Before := p2.Vel
 
@@ -85,7 +85,7 @@ func TestParticlesCollisionStress(t *testing.T) {
 
 		assert.True(t, wasCollision, "No collision detected")
 		assert.InEpsilon(t, sumImpulsesBefore.Length(), p1.Impulse().Add(p2.Impulse()).Length(), config.Eps, "The law of conservation of impulse check")
-		assert.InEpsilon(t, sumEnergyBefore, p1.KeeneticEnergy()+p2.KeeneticEnergy(), config.Eps, "The law of conservation of energy check")
+		assert.InEpsilon(t, sumEnergyBefore, p1.KineticEnergy()+p2.KineticEnergy(), config.Eps, "The law of conservation of energy check")
 		assert.NotEqual(t, vel1Before, p1.Vel, "Velocity not changed")
 		assert.NotEqual(t, vel2Before, p2.Vel, "Velocity not changed")
 	}
@@ -108,7 +108,7 @@ func TestParticlesCollisionStress2D(t *testing.T) {
 		}
 
 		sumImpulsesBefore := p1.Impulse().Add(p2.Impulse())
-		sumEnergyBefore := p1.KeeneticEnergy() + p2.KeeneticEnergy()
+		sumEnergyBefore := p1.KineticEnergy() + p2.KineticEnergy()
 		vel1Before := p1.Vel
 		vel2Before := p2.Vel
 
@@ -116,7 +116,7 @@ func TestParticlesCollisionStress2D(t *testing.T) {
 
 		assert.True(t, wasCollision, "No collision detected")
 		assert.InEpsilon(t, sumImpulsesBefore.Length(), p1.Impulse().Add(p2.Impulse()).Length(), config.Eps, "The law of conservation of impulse check")
-		assert.InEpsilon(t, sumEnergyBefore, p1.KeeneticEnergy()+p2.KeeneticEnergy(), config.Eps, "The law of conservation of energy check")
+		assert.InEpsilon(t, sumEnergyBefore, p1.KineticEnergy()+p2.KineticEnergy(), config.Eps, "The law of conservation of energy check")
 		assert.NotEqual(t, vel1Before, p1.Vel, "Velocity not changed")
 		assert.NotEqual(t, vel2Before, p2.Vel, "Velocity not changed")
 	}
