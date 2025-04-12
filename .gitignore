@@ -1,2 +1,5 @@
 simulator
 .idea
+files
+.env
+*.json

@@ -13,7 +13,7 @@ func NewCollisionCounterObserver() *CollisionCounterObserver {
 	return &CollisionCounterObserver{}
 }
 
-func (c *CollisionCounterObserver) Collision(particle1 *particle.Particle, particle2 *particle.Particle) {
+func (c *CollisionCounterObserver) Collision(*particle.Particle, *particle.Particle) {
 	c.counter++
 }
 

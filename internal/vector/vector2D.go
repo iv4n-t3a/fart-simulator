@@ -11,6 +11,10 @@ type Vector2D struct {
 	y float64
 }
 
+func (v Vector2D) Coords() []float64 {
+	return []float64{v.x, v.y}
+}
+
 func NewVector2D(x float64, y float64) Vector2D {
 	return Vector2D{
 		x: x,
