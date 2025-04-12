@@ -11,6 +11,7 @@ type Vector interface {
 	Length() float64
 	Dist(Vector) float64
 	IsCollinear(Vector) bool
+	Coords() []float64
 
 	X() float64
 	Y() float64

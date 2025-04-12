@@ -38,6 +38,10 @@ func (s *SingleChunkSimulation) SubscribeCollisionWithContainer(obs observers.Co
 	s.chunk.SubscribeCollisionWithContainer(obs)
 }
 
+func (s *SingleChunkSimulation) SubscribeTime(obs observers.TimeObserver) {
+	s.chunk.SubscribeTime(obs)
+}
+
 func (s *SingleChunkSimulation) AddReporter(reporter metrics.Reporter) {
 	s.reporters = append(s.reporters, reporter)
 }

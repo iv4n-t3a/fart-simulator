@@ -12,6 +12,10 @@ type Vector3D struct {
 	z float64
 }
 
+func (v Vector3D) Coords() []float64 {
+	return []float64{v.x, v.y, v.z}
+}
+
 func NewVector3D(x float64, y float64, z float64) Vector3D {
 	return Vector3D{
 		x: x,

@@ -14,4 +14,5 @@ type Chunk interface {
 	SubscribeParticleRemoved(observers.ParticleRemovedObserver)
 	SubscribeCollision(observers.CollisionObserver)
 	SubscribeCollisionWithContainer(observers.CollisionWithContainerObserver)
+	SubscribeTime(observers.TimeObserver)
 }
