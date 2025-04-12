@@ -9,7 +9,7 @@ import (
 )
 
 func RunSimpleSimulation() {
-	sides := []float64{1.0, 1.0}
+	sides := []float64{1.0, 1.0, 1.0}
 	container := container.NewRectContainer(sides)
 	chunkFactory := naive_chunk.NewNaiveChunkFactory(0.01)
 	spawner := spawner.NewRectSpawner(5.0, *container)
