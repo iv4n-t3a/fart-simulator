@@ -27,20 +27,20 @@ func (c *NaiveChunk) AddParticle(p particle.Particle) {
 	c.particles = append(c.particles, p)
 }
 
-func (c *NaiveChunk) SubscribeParticleInserted(obs *observers.ParticleInsertedObserver) {
-	c.particleInsertedObservers = append(c.particleInsertedObservers, *obs)
+func (c *NaiveChunk) SubscribeParticleInserted(obs observers.ParticleInsertedObserver) {
+	c.particleInsertedObservers = append(c.particleInsertedObservers, obs)
 }
 
-func (c *NaiveChunk) SubscribeParticleRemoved(obs *observers.ParticleRemovedObserver) {
-	c.particleRemovedObservers = append(c.particleRemovedObservers, *obs)
+func (c *NaiveChunk) SubscribeParticleRemoved(obs observers.ParticleRemovedObserver) {
+	c.particleRemovedObservers = append(c.particleRemovedObservers, obs)
 }
 
-func (c *NaiveChunk) SubscribeCollision(obs *observers.CollisionObserver) {
-	c.collisionObservers = append(c.collisionObservers, *obs)
+func (c *NaiveChunk) SubscribeCollision(obs observers.CollisionObserver) {
+	c.collisionObservers = append(c.collisionObservers, obs)
 }
 
-func (c *NaiveChunk) SubscribeCollisionWithContainer(obs *observers.CollisionWithContainerObserver) {
-	c.collisionWithContainerObservers = append(c.collisionWithContainerObservers, *obs)
+func (c *NaiveChunk) SubscribeCollisionWithContainer(obs observers.CollisionWithContainerObserver) {
+	c.collisionWithContainerObservers = append(c.collisionWithContainerObservers, obs)
 }
 
 func (c *NaiveChunk) Simulate(dt float64) {

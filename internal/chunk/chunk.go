@@ -8,10 +8,10 @@ import (
 type Chunk interface {
 	AddParticle(particle.Particle)
 
-	SubscribeParticleInserted(*observers.ParticleInsertedObserver)
-	SubscribeParticleRemoved(*observers.ParticleRemovedObserver)
-	SubscribeCollision(*observers.CollisionObserver)
-	SubscribeCollisionWithContainer(*observers.CollisionWithContainerObserver)
+	SubscribeParticleInserted(observers.ParticleInsertedObserver)
+	SubscribeParticleRemoved(observers.ParticleRemovedObserver)
+	SubscribeCollision(observers.CollisionObserver)
+	SubscribeCollisionWithContainer(observers.CollisionWithContainerObserver)
 	EvaluateTimeStep() float64
 
 	// Mustn't be called on values greater than EvaluateTimeStep
