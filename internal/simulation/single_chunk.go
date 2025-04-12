@@ -4,15 +4,13 @@ import (
 	"github.com/iv4n-t3a/fart-simulator/internal/chunk"
 	"github.com/iv4n-t3a/fart-simulator/internal/chunk/observers"
 	"github.com/iv4n-t3a/fart-simulator/internal/container"
-	"github.com/iv4n-t3a/fart-simulator/internal/metrics"
 	"github.com/iv4n-t3a/fart-simulator/internal/particle"
 	"github.com/iv4n-t3a/fart-simulator/internal/spawner"
 )
 
 type SingleChunkSimulation struct {
-	time      float64
-	chunk     chunk.Chunk
-	reporters []metrics.Reporter
+	time  float64
+	chunk chunk.Chunk
 }
 
 func NewSingleChunkSimulation(particlesAmount int, container container.Container,
@@ -30,20 +28,8 @@ func NewSingleChunkSimulation(particlesAmount int, container container.Container
 	}
 }
 
-func (s *SingleChunkSimulation) SubscribeCollision(obs observers.CollisionObserver) {
-	s.chunk.SubscribeCollision(obs)
-}
-
-func (s *SingleChunkSimulation) SubscribeCollisionWithContainer(obs observers.CollisionWithContainerObserver) {
-	s.chunk.SubscribeCollisionWithContainer(obs)
-}
-
-func (s *SingleChunkSimulation) SubscribeTime(obs observers.TimeObserver) {
-	s.chunk.SubscribeTime(obs)
-}
-
-func (s *SingleChunkSimulation) AddReporter(reporter metrics.Reporter) {
-	s.reporters = append(s.reporters, reporter)
+func (s *SingleChunkSimulation) Observers() *observers.ObserversComposition {
+	return s.chunk.Observers()
 }
 
 func (s *SingleChunkSimulation) Run(time float64) {
@@ -51,11 +37,5 @@ func (s *SingleChunkSimulation) Run(time float64) {
 		dt := s.chunk.EvaluateTimeStep()
 		s.chunk.Simulate(dt)
 		s.time += dt
-	}
-}
-
-func (s *SingleChunkSimulation) ReportMetrics() {
-	for i := range s.reporters {
-		s.reporters[i].Report()
 	}
 }

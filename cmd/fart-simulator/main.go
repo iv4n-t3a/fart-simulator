@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/iv4n-t3a/fart-simulator/internal/chunk/naive_chunk"
 	"github.com/iv4n-t3a/fart-simulator/internal/container"
-	"github.com/iv4n-t3a/fart-simulator/internal/metrics/observers"
+	"github.com/iv4n-t3a/fart-simulator/internal/metrics"
 	"github.com/iv4n-t3a/fart-simulator/internal/simulation"
 	"github.com/iv4n-t3a/fart-simulator/internal/spawner"
 )
@@ -16,22 +16,22 @@ func RunSimpleSimulation() {
 
 	simulationInst := simulation.NewSingleChunkSimulation(1000, containerInst, chunkFactory, spawnerInst)
 
-	colCounter := observers.NewCollisionCounterObserver()
-	simulationInst.SubscribeCollision(colCounter)
-	simulationInst.AddReporter(colCounter)
+	timeObserver := metrics.NewTimeObserver()
+	simulationInst.Observers().SubscribeTime(timeObserver)
 
-	colContCounter := observers.NewCollisionWithContainerCounterObserver()
-	simulationInst.SubscribeCollisionWithContainer(colContCounter)
-	simulationInst.AddReporter(colContCounter)
+	colCounter := metrics.NewCollisionCounterObserver()
+	simulationInst.Observers().SubscribeCollision(colCounter)
+	defer colCounter.Report()
 
-	timeObserver := observers.NewTimeObserver()
-	containerAggregator := observers.NewCollisionWithContainerAggregatorObserver(timeObserver)
-	simulationInst.SubscribeTime(timeObserver)
-	simulationInst.SubscribeCollisionWithContainer(containerAggregator)
-	simulationInst.AddReporter(containerAggregator)
+	colContCounter := metrics.NewCollisionWithContainerCounterObserver()
+	simulationInst.Observers().SubscribeCollisionWithContainer(colContCounter)
+	defer colContCounter.Report()
+
+	containerAggregator := metrics.NewCollisionWithContainerAggregatorObserver(timeObserver)
+	simulationInst.Observers().SubscribeCollisionWithContainer(containerAggregator)
+	defer containerAggregator.Report()
 
 	simulationInst.Run(1.0)
-	simulationInst.ReportMetrics()
 }
 
 func main() {
