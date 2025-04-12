@@ -5,8 +5,7 @@ import (
 	"github.com/iv4n-t3a/fart-simulator/internal/chunk/observers"
 	"github.com/iv4n-t3a/fart-simulator/internal/container"
 	"github.com/iv4n-t3a/fart-simulator/internal/metrics"
-	"github.com/iv4n-t3a/fart-simulator/internal/particle"
-	"github.com/iv4n-t3a/fart-simulator/internal/vector"
+	"github.com/iv4n-t3a/fart-simulator/internal/spawner"
 )
 
 type SingleChunkSimulation struct {
@@ -15,22 +14,17 @@ type SingleChunkSimulation struct {
 	reporters []metrics.Reporter
 }
 
-func NewSingleChunkSimulation(particlesAmount int) *SingleChunkSimulation {
-	particles := particle.SpawnStaticRectangular2D(
-		particlesAmount,
-		vector.NewVector2D(0, 0),
-		vector.NewVector2D(1, 1),
-	)
-	particle.AssignRandomSpeed2D(particles, 0, 5)
+func NewSingleChunkSimulation(particlesAmount int, container container.Container,
+	chunkFactory chunk.ChunkFactory, spawner spawner.Spawner) *SingleChunkSimulation {
+	chunk := chunkFactory.NewChunk(container)
 
-	rectContainerInst := container.NewRectContainer([]float64{1, 1})
-	naiveChunk := chunk.NewNaiveChunk(1.0/100, rectContainerInst)
-
-	naiveChunk.InitializeParticles(particles)
+	for range particlesAmount {
+		chunk.AddParticle(spawner.SpawnParticle())
+	}
 
 	return &SingleChunkSimulation{
 		time:  0,
-		chunk: naiveChunk,
+		chunk: chunk,
 	}
 }
 

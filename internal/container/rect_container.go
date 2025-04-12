@@ -21,3 +21,7 @@ func (c *RectContainer) ProcessCollision(p *particle.Particle) bool {
 
 	return detectedCollision
 }
+
+func (c RectContainer) GetSides() []float64 {
+	return c.sides
+}
