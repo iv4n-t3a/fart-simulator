@@ -133,16 +133,15 @@ func (v Vector3D) Dimension(i int) float64 {
 }
 
 func (v Vector3D) SetDimension(val float64, i int) Vector {
-	if (i < 0) || (i > 2) {
-		panic(fmt.Sprintf("Trying to access %d dimension on 3D vector", i))
-	}
 	switch i {
 	case 0:
 		v.x = val
 	case 1:
 		v.y = val
-	default:
+	case 2:
 		v.z = val
+	default:
+		panic(fmt.Sprintf("Trying to access %d dimension on 3D vector", i))
 	}
 	return v
 }

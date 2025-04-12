@@ -1,4 +1,4 @@
-package chunk
+package naive_chunk
 
 import (
 	"github.com/iv4n-t3a/fart-simulator/internal/chunk/observers"
@@ -16,10 +16,11 @@ type NaiveChunk struct {
 	collisionWithContainerObservers []observers.CollisionWithContainerObserver
 }
 
-func NewNaiveChunk(dt float64, container container.Container) *NaiveChunk {
+func newNaiveChunk(dt float64, container container.Container, particles []particle.Particle) *NaiveChunk {
 	return &NaiveChunk{
 		dt:        dt,
 		container: container,
+		particles: particles,
 	}
 }
 
@@ -28,10 +29,6 @@ func (c *NaiveChunk) AddParticle(p particle.Particle) {
 		c.particleInsertedObservers[i].ParticleInserted(&p)
 	}
 	c.particles = append(c.particles, p)
-}
-
-func (c *NaiveChunk) InitializeParticles(particles *[]particle.Particle) {
-	c.particles = *particles
 }
 
 func (c *NaiveChunk) SubscribeParticleInserted(obs observers.ParticleInsertedObserver) {

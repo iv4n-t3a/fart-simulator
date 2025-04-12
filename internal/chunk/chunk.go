@@ -7,14 +7,11 @@ import (
 
 type Chunk interface {
 	AddParticle(particle.Particle)
-	InitializeParticles(particles *[]particle.Particle)
+	EvaluateTimeStep() float64
+	Simulate(deltaTime float64) // Mustn't be called on values greater than EvaluateTimeStep
 
 	SubscribeParticleInserted(observers.ParticleInsertedObserver)
 	SubscribeParticleRemoved(observers.ParticleRemovedObserver)
 	SubscribeCollision(observers.CollisionObserver)
 	SubscribeCollisionWithContainer(observers.CollisionWithContainerObserver)
-	EvaluateTimeStep() float64
-
-	// Mustn't be called on values greater than EvaluateTimeStep
-	Simulate(deltaTime float64)
 }

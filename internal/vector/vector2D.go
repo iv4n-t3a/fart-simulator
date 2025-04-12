@@ -120,13 +120,13 @@ func (v Vector2D) Dimension(i int) float64 {
 }
 
 func (v Vector2D) SetDimension(val float64, i int) Vector {
-	if i == 0 {
+	switch i {
+	case 0:
 		v.x = val
-		return Vector2D{val, v.y}
-	}
-	if i == 1 {
+	case 1:
 		v.y = val
-		return Vector2D{v.x, val}
+	default:
+		panic(fmt.Sprintf("Trying to access %d dimension on 2D vector", i))
 	}
-	panic(fmt.Sprintf("Trying to access %d dimension on 2D vector", i))
+	return v
 }
