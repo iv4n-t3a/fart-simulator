@@ -29,7 +29,7 @@ func TestParticlesCollision(t *testing.T) {
 	assert.Equal(t, 1.0, p1.Vel.Y(), "Velocity check")
 	assert.Equal(t, 0.0, p1.Vel.Z(), "Velocity check")
 
-  assert.Equal(t, 1.0, p2.Vel.X(), "Velocity check")
+	assert.Equal(t, 1.0, p2.Vel.X(), "Velocity check")
 	assert.Equal(t, 0.0, p2.Vel.Y(), "Velocity check")
 	assert.Equal(t, 0.0, p2.Vel.Z(), "Velocity check")
 }
