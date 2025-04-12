@@ -16,10 +16,11 @@ type NaiveChunk struct {
 	collisionWithContainerObservers []observers.CollisionWithContainerObserver
 }
 
-func newNaiveChunk(dt float64, container container.Container) *NaiveChunk {
+func newNaiveChunk(dt float64, container container.Container, particles []particle.Particle) *NaiveChunk {
 	return &NaiveChunk{
 		dt:        dt,
 		container: container,
+		particles: particles,
 	}
 }
 
