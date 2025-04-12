@@ -25,10 +25,10 @@ func RunSimpleSimulation() {
 	simulationInst.AddReporter(colContCounter)
 
 	timeObserver := observers.NewTimeObserver()
+	containerAggregator := observers.NewCollisionWithContainerAggregatorObserver(timeObserver)
 	simulationInst.SubscribeTime(timeObserver)
-	ContainerPlot := observers.NewCollisionWithContainerPlotObserver(timeObserver)
-	simulationInst.SubscribeCollisionWithContainer(ContainerPlot)
-	simulationInst.AddReporter(ContainerPlot)
+	simulationInst.SubscribeCollisionWithContainer(containerAggregator)
+	simulationInst.AddReporter(containerAggregator)
 
 	simulationInst.Run(1.0)
 	simulationInst.ReportMetrics()

@@ -48,5 +48,5 @@ def plot_states(states):
     plt.show()
 
 if __name__ == "__main__":
-    states = read_file("internal/metrics/files/collision_with_container_plot.json")
+    states = read_file("data/collision_with_container_plot.json")
     plot_states(states)

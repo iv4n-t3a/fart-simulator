@@ -13,19 +13,19 @@ type CollisionData struct {
 	Time     float64   `json:"time"`
 }
 
-type CollisionWithContainerPlotObserver struct {
+type CollisionWithContainerAggregatorObserver struct {
 	timeSource *TimeObserver
 	data       []CollisionData
 }
 
-func NewCollisionWithContainerPlotObserver(timeObserver *TimeObserver) *CollisionWithContainerPlotObserver {
-	return &CollisionWithContainerPlotObserver{
+func NewCollisionWithContainerAggregatorObserver(timeObserver *TimeObserver) *CollisionWithContainerAggregatorObserver {
+	return &CollisionWithContainerAggregatorObserver{
 		timeObserver,
 		make([]CollisionData, 0),
 	}
 }
 
-func (c *CollisionWithContainerPlotObserver) CollisionWithContainer(p *particle.Particle) {
+func (c *CollisionWithContainerAggregatorObserver) CollisionWithContainer(p *particle.Particle) {
 	c.data = append(c.data, CollisionData{
 		p.Pos.Coords(),
 		p.Vel.Coords(),
@@ -33,12 +33,12 @@ func (c *CollisionWithContainerPlotObserver) CollisionWithContainer(p *particle.
 	})
 }
 
-func (c *CollisionWithContainerPlotObserver) Report() {
+func (c *CollisionWithContainerAggregatorObserver) Report() {
 	jsonData, err := json.MarshalIndent(c.data, "", "  ")
 	if err != nil {
 		fmt.Println("Error marshalling collision data")
 	}
-	err = os.WriteFile("internal/metrics/files/collision_with_container_plot.json", jsonData, 0644)
+	err = os.WriteFile("data/collision_with_container_plot.json", jsonData, 0644)
 	if err != nil {
 		fmt.Println("Error writing collision data")
 	}
