@@ -9,12 +9,12 @@ import (
 )
 
 func RunSimpleSimulation() {
-	sides := []float64{1.0, 1.0, 1.0}
+	sides := []float64{0.002, 0.002, 0.002}
 	containerInst := container.NewRectContainer(sides)
 	chunkFactory := naive_chunk.NewNaiveChunkFactory(0.01)
 	spawnerInst := spawner.NewRectSpawner(5.0, *containerInst)
 
-	simulationInst := simulation.NewSingleChunkSimulation(100, containerInst, chunkFactory, spawnerInst)
+	simulationInst := simulation.NewSingleChunkSimulation(1000, containerInst, chunkFactory, spawnerInst)
 
 	colCounter := observers.NewCollisionCounterObserver()
 	simulationInst.SubscribeCollision(colCounter)
