@@ -119,14 +119,14 @@ func (v Vector2D) Dimension(i int) float64 {
 	panic(fmt.Sprintf("Trying to access %d dimension on 2D vector", i))
 }
 
-func (v Vector2D) SetDimension(val float64, i int) {
+func (v Vector2D) SetDimension(val float64, i int) Vector {
 	if i == 0 {
 		v.x = val
-		return
+		return Vector2D{val, v.y}
 	}
 	if i == 1 {
 		v.y = val
-		return
+		return Vector2D{v.x, val}
 	}
 	panic(fmt.Sprintf("Trying to access %d dimension on 2D vector", i))
 }
