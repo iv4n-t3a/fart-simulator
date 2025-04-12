@@ -7,6 +7,7 @@ import (
 
 type Chunk interface {
 	AddParticle(particle.Particle)
+	InitializeParticles(particles *[]particle.Particle)
 
 	SubscribeParticleInserted(observers.ParticleInsertedObserver)
 	SubscribeParticleRemoved(observers.ParticleRemovedObserver)
