@@ -43,7 +43,7 @@ func (s *SingleChunkSimulation) Run(time float64) {
 		s.time += dt
 		progressAdd += dt
 
-		if progressAdd >= time/100 {
+		for progressAdd >= time/100 {
 			bar.Add(1)
 			progressAdd -= time / 100
 		}
