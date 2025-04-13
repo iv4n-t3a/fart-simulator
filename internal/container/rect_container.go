@@ -38,7 +38,7 @@ func (c *RectContainer) TimeBeforeCollision(p particle.Particle) float64 {
 		}
 
 		if v > 0 {
-			res = min((c.sides[i] - x - p.Radius) / v)
+			res = min((c.sides[i] - x - p.Radius) / v, res)
 		} else {
 			res = min((p.Radius-x)/v, res)
 		}
