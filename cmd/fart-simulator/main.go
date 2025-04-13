@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/iv4n-t3a/fart-simulator/internal/chunk/naive_chunk"
+	"github.com/iv4n-t3a/fart-simulator/internal/chunk/kdtree_chunk"
 	"github.com/iv4n-t3a/fart-simulator/internal/container"
 	"github.com/iv4n-t3a/fart-simulator/internal/metrics"
 	"github.com/iv4n-t3a/fart-simulator/internal/simulation"
@@ -9,12 +9,15 @@ import (
 )
 
 func RunSimpleSimulation() {
-	sides := []float64{0.05, 0.05, 0.05}
+  side := 0.05
+  time := 1.0
+
+	sides := []float64{side, side, side}
 	containerInst := container.NewRectContainer(sides)
-	chunkFactory := naive_chunk.NewNaiveChunkFactory(0.0001)
+	chunkFactory := kdtree_chunk.NewKDTreeChunkFactory()
 	spawnerInst := spawner.NewRectSpawner(1.0, *containerInst)
 
-	simulationInst := simulation.NewSingleChunkSimulation(1000, containerInst, chunkFactory, spawnerInst)
+	simulationInst := simulation.NewSingleChunkSimulation(10000, containerInst, chunkFactory, spawnerInst)
 
 	timeObserver := metrics.NewTimeObserver()
 	simulationInst.Observers().SubscribeTime(timeObserver)
@@ -35,7 +38,7 @@ func RunSimpleSimulation() {
 	simulationInst.Observers().SubscribeParticle(particleObserver)
 	defer particleObserver.Report()
 
-	simulationInst.Run(1.0)
+	simulationInst.Run(time)
 }
 
 func main() {

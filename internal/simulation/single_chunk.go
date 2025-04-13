@@ -1,6 +1,8 @@
 package simulation
 
 import (
+	"fmt"
+
 	"github.com/iv4n-t3a/fart-simulator/internal/chunk"
 	"github.com/iv4n-t3a/fart-simulator/internal/chunk/observers"
 	"github.com/iv4n-t3a/fart-simulator/internal/container"
@@ -39,6 +41,10 @@ func (s *SingleChunkSimulation) Run(time float64) {
 
 	for s.time < time {
 		dt := s.chunk.EvaluateTimeStep()
+
+		if dt <= 0 {
+			panic(fmt.Sprintf("dt = %f is supposed to be positive", dt))
+		}
 		s.chunk.Simulate(dt)
 		s.time += dt
 		progressAdd += dt
