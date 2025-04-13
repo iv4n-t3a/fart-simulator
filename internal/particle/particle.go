@@ -5,6 +5,7 @@ import (
 	"math"
 
 	"github.com/iv4n-t3a/fart-simulator/config"
+	"github.com/iv4n-t3a/fart-simulator/internal/geometry"
 	"github.com/iv4n-t3a/fart-simulator/internal/math_util"
 	"github.com/iv4n-t3a/fart-simulator/internal/vector"
 )
@@ -72,4 +73,26 @@ func velocitiesAfterCollision(u1 float64, u2 float64, m1 float64, m2 float64) (f
 	u2 = (P - m1*u1) / m2
 
 	return u1, u2
+}
+
+func timeBeforeCollision(p1 Particle, p2 Particle) float64 {
+	trajectory1 := geometry.Line{Start: p1.Pos, Dir: p1.Vel}
+	trajectory2 := geometry.Line{Start: p2.Pos, Dir: p2.Vel}
+
+  dist := trajectory1.Dist(trajectory2)
+
+  if dist >= p1.Radius + p2.Radius {
+    return math.Inf(1)
+  }
+
+  // TODO: implement
+  panic("Not implemented")
+}
+
+// Methods to satisfy kdtree.Point interface in order to use it in kdtree
+func (p Particle) Dimensions() int {
+	return p.Pos.Dimensions()
+}
+func (p Particle) Dimension(i int) float64 {
+	return p.Pos.Dimension(i)
 }

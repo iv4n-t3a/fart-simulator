@@ -22,7 +22,7 @@ func newNaiveChunk(dt float64, container container.Container, particles []partic
 }
 
 func (c *NaiveChunk) AddParticle(p particle.Particle) {
-  c.observers.ParticleInserted(&p)
+	c.observers.ParticleInserted(&p)
 	c.particles = append(c.particles, p)
 }
 
