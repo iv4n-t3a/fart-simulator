@@ -48,7 +48,7 @@ def plot_states(states):
     color_param = np.array(x * 10 + y + z).flatten()
 
     norm = Normalize(vmin=color_param.min(), vmax=color_param.max())
-    colors = plt.cm.colorwarm(norm(color_param))
+    colors = plt.cm.coolwarm(norm(color_param))
 
     ax.quiver(x, y, z, u, v, w, length=SCALE,
               normalize=NORMALIZE, color=colors)

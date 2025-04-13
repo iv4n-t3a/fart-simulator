@@ -9,8 +9,8 @@ import (
 )
 
 func RunSimpleSimulation() {
-  side := 1e-5
-  time := 1e-7
+  side := 0.05
+  time := 1.0
 
 	sides := []float64{side, side, side}
 	containerInst := container.NewRectContainer(sides)
@@ -33,6 +33,10 @@ func RunSimpleSimulation() {
 	containerAggregator := metrics.NewCollisionWithContainerAggregatorObserver(timeObserver)
 	simulationInst.Observers().SubscribeCollisionWithContainer(containerAggregator)
 	defer containerAggregator.Report()
+
+	particleObserver := metrics.NewParticleObserver(timeObserver)
+	simulationInst.Observers().SubscribeParticle(particleObserver)
+	defer particleObserver.Report()
 
 	simulationInst.Run(time)
 }

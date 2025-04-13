@@ -36,6 +36,7 @@ func (c *NaiveChunk) Simulate(dt float64) {
 	}
 
 	for i := range c.particles {
+		c.observers.ObserveParticle(&c.particles[i])
 		if c.container.ProcessCollision(&c.particles[i]) {
 			c.observers.CollisionWithContainer(&c.particles[i])
 		}
