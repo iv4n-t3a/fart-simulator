@@ -1,4 +1,4 @@
-package observers
+package metrics
 
 type TimeObserver struct {
 	Duration float64

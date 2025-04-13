@@ -1,4 +1,4 @@
-package observers
+package metrics
 
 import (
 	"encoding/json"
