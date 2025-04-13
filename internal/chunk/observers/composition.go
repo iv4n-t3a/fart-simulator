@@ -8,6 +8,7 @@ type ObserversComposition struct {
 	collisionObservers              []CollisionObserver
 	collisionWithContainerObservers []CollisionWithContainerObserver
 	timeObservers                   []TimeObserver
+	particleObservers               []ParticleObserver
 }
 
 func (c *ObserversComposition) SubscribeParticleInserted(obs ParticleInsertedObserver) {
@@ -28,6 +29,10 @@ func (c *ObserversComposition) SubscribeCollisionWithContainer(obs CollisionWith
 
 func (c *ObserversComposition) SubscribeTime(obs TimeObserver) {
 	c.timeObservers = append(c.timeObservers, obs)
+}
+
+func (c *ObserversComposition) SubscribeParticle(obs ParticleObserver) {
+	c.particleObservers = append(c.particleObservers, obs)
 }
 
 func (c *ObserversComposition) ParticleInserted(p *particle.Particle) {
@@ -57,5 +62,11 @@ func (c *ObserversComposition) CollisionWithContainer(p *particle.Particle) {
 func (c *ObserversComposition) Tick(t float64) {
 	for i := range c.timeObservers {
 		c.timeObservers[i].Tick(t)
+	}
+}
+
+func (c *ObserversComposition) ObserveParticle(p *particle.Particle) {
+	for i := range c.particleObservers {
+		c.particleObservers[i].ObserveParticle(p)
 	}
 }

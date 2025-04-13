@@ -9,9 +9,9 @@ import (
 )
 
 func RunSimpleSimulation() {
-	sides := []float64{0.2, 0.2, 0.2}
+	sides := []float64{0.05, 0.05, 0.05}
 	containerInst := container.NewRectContainer(sides)
-	chunkFactory := naive_chunk.NewNaiveChunkFactory(0.01)
+	chunkFactory := naive_chunk.NewNaiveChunkFactory(0.0001)
 	spawnerInst := spawner.NewRectSpawner(1.0, *containerInst)
 
 	simulationInst := simulation.NewSingleChunkSimulation(1000, containerInst, chunkFactory, spawnerInst)
@@ -30,6 +30,10 @@ func RunSimpleSimulation() {
 	containerAggregator := metrics.NewCollisionWithContainerAggregatorObserver(timeObserver)
 	simulationInst.Observers().SubscribeCollisionWithContainer(containerAggregator)
 	defer containerAggregator.Report()
+
+	particleObserver := metrics.NewParticleObserver(timeObserver)
+	simulationInst.Observers().SubscribeParticle(particleObserver)
+	defer particleObserver.Report()
 
 	simulationInst.Run(1.0)
 }
