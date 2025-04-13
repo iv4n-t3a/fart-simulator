@@ -1,4 +1,5 @@
 import json
+from typing import Dict, List
 
 
 class PhysicsState:
@@ -21,7 +22,7 @@ def read_physics_states(filename):
         states.append(state)
     return states
 
-def physic_states_per_time(states: [PhysicsState]) -> {float: PhysicsState}:
+def physic_states_per_time(states: List[PhysicsState]) -> Dict[float, List[PhysicsState]]:
     time_map = {}
 
     for state in states:
