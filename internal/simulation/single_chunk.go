@@ -6,6 +6,7 @@ import (
 	"github.com/iv4n-t3a/fart-simulator/internal/container"
 	"github.com/iv4n-t3a/fart-simulator/internal/particle"
 	"github.com/iv4n-t3a/fart-simulator/internal/spawner"
+	"github.com/schollz/progressbar/v3"
 )
 
 type SingleChunkSimulation struct {
@@ -33,9 +34,18 @@ func (s *SingleChunkSimulation) Observers() *observers.ObserversComposition {
 }
 
 func (s *SingleChunkSimulation) Run(time float64) {
+	bar := progressbar.Default(100)
+	progressAdd := 0.0
+
 	for s.time < time {
 		dt := s.chunk.EvaluateTimeStep()
 		s.chunk.Simulate(dt)
 		s.time += dt
+		progressAdd += dt
+
+		if progressAdd >= time / 100 {
+			bar.Add(1)
+      progressAdd -= time / 100
+		}
 	}
 }
