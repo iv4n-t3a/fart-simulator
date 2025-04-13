@@ -31,6 +31,10 @@ func RunSimpleSimulation() {
 	simulationInst.Observers().SubscribeCollisionWithContainer(containerAggregator)
 	defer containerAggregator.Report()
 
+	particleObserver := metrics.NewParticleObserver(timeObserver)
+	simulationInst.Observers().SubscribeParticle(particleObserver)
+	defer particleObserver.Report()
+
 	simulationInst.Run(1.0)
 }
 
