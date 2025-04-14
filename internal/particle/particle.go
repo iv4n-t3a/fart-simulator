@@ -61,9 +61,11 @@ func velocitiesAfterCollision(u1 float64, u2 float64, m1 float64, m2 float64) (f
 		panic("Equation is supposed to have solutions")
 	}
 
-	if math.Abs(u1-u11) <= config.Eps {
+  eps := math.Abs(u11 - u12) * 0.01
+
+	if math.Abs(u1-u11) <= eps {
 		u1 = u12
-	} else if math.Abs(u1-u12) <= config.Eps {
+	} else if math.Abs(u1-u12) <= eps {
 		u1 = u11
 	} else {
 		panic(fmt.Sprintf("One solution is supposed to match with input: %f != %f, %f", u1, u11, u12))
