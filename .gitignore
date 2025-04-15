@@ -3,3 +3,4 @@ simulator
 files
 .env
 *.json
+__pycache__
