@@ -22,6 +22,10 @@ func RunSimpleSimulation() {
 	timeObserver := metrics.NewTimeObserver()
 	simulationInst.Observers().SubscribeTime(timeObserver)
 
+	dtAggregator := metrics.NewDtAggregator()
+	simulationInst.Observers().SubscribeTime(dtAggregator)
+	defer dtAggregator.Report()
+
 	colCounter := metrics.NewCollisionCounterObserver()
 	simulationInst.Observers().SubscribeCollision(colCounter)
 	defer colCounter.Report()
