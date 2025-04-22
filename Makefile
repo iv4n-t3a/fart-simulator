@@ -13,6 +13,7 @@ test:
 
 $(TARGET): $(SOURCES)
 	go mod tidy
+	make -C api
 	go build -o $(TARGET) cmd/fart-simulator/main.go
 
 .PHONY: build, run, test

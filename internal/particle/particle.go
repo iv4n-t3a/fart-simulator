@@ -15,6 +15,7 @@ type Particle struct {
 	Vel    vector.Vector
 	Radius float64
 	Mass   float64
+	Index  int64
 }
 
 func (p Particle) Impulse() vector.Vector {
@@ -62,7 +63,7 @@ func velocitiesAfterCollision(u1 float64, u2 float64, m1 float64, m2 float64) (f
 		panic("Equation is supposed to have solutions")
 	}
 
-  eps := math.Abs(u11 - u12) * 0.01
+	eps := math.Abs(u11-u12) * 0.01
 
 	if math.Abs(u1-u11) <= eps {
 		u1 = u12
@@ -81,14 +82,14 @@ func timeBeforeCollision(p1 Particle, p2 Particle) float64 {
 	trajectory1 := geometry.Line{Start: p1.Pos, Dir: p1.Vel}
 	trajectory2 := geometry.Line{Start: p2.Pos, Dir: p2.Vel}
 
-  dist := trajectory1.Dist(trajectory2)
+	dist := trajectory1.Dist(trajectory2)
 
-  if dist >= p1.Radius + p2.Radius {
-    return math.Inf(1)
-  }
+	if dist >= p1.Radius+p2.Radius {
+		return math.Inf(1)
+	}
 
-  // TODO: implement
-  panic("Not implemented")
+	// TODO: implement
+	panic("Not implemented")
 }
 
 // Methods to satisfy kdtree.Point interface in order to use it in kdtree

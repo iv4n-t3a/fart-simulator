@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package ipc.visualisation.particles3D;
+
+option go_package = "./generated/ipc/visualisation_api/";
+
+message Particle3D {
+  double pos_x = 1;
+  double pos_y = 2;
+  double pos_z = 3;
+
+  double vel_x = 4;
+  double vel_y = 5;
+  double vel_z = 6;
+
+	double radius = 7;
+	double mass = 8;
+
+  int64 index = 9;
+}
+
+message Empty {
+}
+
+service Particle3DObserver {
+  rpc ObserveParticle(Particle3D) returns (Empty);
+}

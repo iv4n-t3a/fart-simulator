@@ -1,1 +1,4 @@
 matplotlib
+python3-protobuf
+grpcio
+grpcio-tools

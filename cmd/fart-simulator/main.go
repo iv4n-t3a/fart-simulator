@@ -1,46 +1,27 @@
 package main
 
 import (
-	"github.com/iv4n-t3a/fart-simulator/internal/chunk/kdtree_chunk"
-	"github.com/iv4n-t3a/fart-simulator/internal/container"
-	"github.com/iv4n-t3a/fart-simulator/internal/metrics"
-	"github.com/iv4n-t3a/fart-simulator/internal/simulation"
-	"github.com/iv4n-t3a/fart-simulator/internal/spawner"
+	"fmt"
+
+	"github.com/alecthomas/kong"
+	"github.com/iv4n-t3a/fart-simulator/internal/experiments"
 )
 
-func RunSimpleSimulation() {
-  side := 0.05
-  time := 1.0
-
-	sides := []float64{side, side, side}
-	containerInst := container.NewRectContainer(sides)
-	chunkFactory := kdtree_chunk.NewKDTreeChunkFactory()
-	spawnerInst := spawner.NewRectSpawner(1.0, *containerInst)
-
-	simulationInst := simulation.NewSingleChunkSimulation(10000, containerInst, chunkFactory, spawnerInst)
-
-	timeObserver := metrics.NewTimeObserver()
-	simulationInst.Observers().SubscribeTime(timeObserver)
-
-	colCounter := metrics.NewCollisionCounterObserver()
-	simulationInst.Observers().SubscribeCollision(colCounter)
-	defer colCounter.Report()
-
-	colContCounter := metrics.NewCollisionWithContainerCounterObserver()
-	simulationInst.Observers().SubscribeCollisionWithContainer(colContCounter)
-	defer colContCounter.Report()
-
-	containerAggregator := metrics.NewCollisionWithContainerAggregatorObserver(timeObserver)
-	simulationInst.Observers().SubscribeCollisionWithContainer(containerAggregator)
-	defer containerAggregator.Report()
-
-	particleObserver := metrics.NewParticleObserver(timeObserver)
-	simulationInst.Observers().SubscribeParticle(particleObserver)
-	defer particleObserver.Report()
-
-	simulationInst.Run(time)
+var CLI struct {
+  Experiment string `short:"e" help:"Experiment to run"`
 }
 
 func main() {
-	RunSimpleSimulation()
+	kong.Parse(&CLI)
+
+	switch CLI.Experiment {
+  case "":
+		experiments.RunSimpleSimulation()
+	case "simple-simulation":
+		experiments.RunSimpleSimulation()
+	case "visualisation":
+		experiments.RunVisualisation()
+	default:
+		panic(fmt.Sprintf("Unknown experiment %s, running default", CLI.Experiment))
+	}
 }

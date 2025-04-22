@@ -36,10 +36,30 @@ func (s *SingleChunkSimulation) Observers() *observers.ObserversComposition {
 }
 
 func (s *SingleChunkSimulation) Run(time float64) {
+	if time > 0 {
+		s.runWithProgressBar(time)
+	} else {
+		s.runWithoutProgressBar(time)
+	}
+}
+
+func (s *SingleChunkSimulation) runWithoutProgressBar(time float64) {
+	for s.time < time || time < 0 {
+		dt := s.chunk.EvaluateTimeStep()
+
+		if dt <= 0 {
+			panic(fmt.Sprintf("dt = %f is supposed to be positive", dt))
+		}
+		s.chunk.Simulate(dt)
+		s.time += dt
+	}
+}
+
+func (s *SingleChunkSimulation) runWithProgressBar(time float64) {
 	bar := progressbar.Default(100)
 	progressAdd := 0.0
 
-	for s.time < time {
+	for s.time < time || time < 0 {
 		dt := s.chunk.EvaluateTimeStep()
 
 		if dt <= 0 {
