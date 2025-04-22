@@ -20,6 +20,8 @@ func NewRectSpawner(maxVelocity float64, radius float64, mass float64, c contain
 		maxVelocity: maxVelocity,
 		sides:       c.GetSides(),
 		lastIndex:   0,
+		radius:      radius,
+		mass:        mass,
 	}
 }
 
