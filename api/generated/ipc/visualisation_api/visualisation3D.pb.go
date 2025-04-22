@@ -129,47 +129,11 @@ func (x *Particle3D) GetIndex() int64 {
 	return 0
 }
 
-type Empty struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Empty) Reset() {
-	*x = Empty{}
-	mi := &file_ipc_visualisation_visualisation3D_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Empty) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Empty) ProtoMessage() {}
-
-func (x *Empty) ProtoReflect() protoreflect.Message {
-	mi := &file_ipc_visualisation_visualisation3D_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Empty.ProtoReflect.Descriptor instead.
-func (*Empty) Descriptor() ([]byte, []int) {
-	return file_ipc_visualisation_visualisation3D_proto_rawDescGZIP(), []int{1}
-}
-
 var File_ipc_visualisation_visualisation3D_proto protoreflect.FileDescriptor
 
 const file_ipc_visualisation_visualisation3D_proto_rawDesc = "" +
 	"\n" +
-	"'ipc/visualisation/visualisation3D.proto\x12\x1dipc.visualisation.particles3D\"\xcc\x01\n" +
+	"'ipc/visualisation/visualisation3D.proto\x12\x11ipc.visualisation\x1a\x1dipc/visualisation/empty.proto\"\xcc\x01\n" +
 	"\n" +
 	"Particle3D\x12\x13\n" +
 	"\x05pos_x\x18\x01 \x01(\x01R\x04posX\x12\x13\n" +
@@ -180,10 +144,9 @@ const file_ipc_visualisation_visualisation3D_proto_rawDesc = "" +
 	"\x05vel_z\x18\x06 \x01(\x01R\x04velZ\x12\x16\n" +
 	"\x06radius\x18\a \x01(\x01R\x06radius\x12\x12\n" +
 	"\x04mass\x18\b \x01(\x01R\x04mass\x12\x14\n" +
-	"\x05index\x18\t \x01(\x03R\x05index\"\a\n" +
-	"\x05Empty2x\n" +
-	"\x12Particle3DObserver\x12b\n" +
-	"\x0fObserveParticle\x12).ipc.visualisation.particles3D.Particle3D\x1a$.ipc.visualisation.particles3D.EmptyB$Z\"./generated/ipc/visualisation_api/b\x06proto3"
+	"\x05index\x18\t \x01(\x03R\x05index2`\n" +
+	"\x12Particle3DObserver\x12J\n" +
+	"\x0fObserveParticle\x12\x1d.ipc.visualisation.Particle3D\x1a\x18.ipc.visualisation.EmptyB$Z\"./generated/ipc/visualisation_api/b\x06proto3"
 
 var (
 	file_ipc_visualisation_visualisation3D_proto_rawDescOnce sync.Once
@@ -197,14 +160,14 @@ func file_ipc_visualisation_visualisation3D_proto_rawDescGZIP() []byte {
 	return file_ipc_visualisation_visualisation3D_proto_rawDescData
 }
 
-var file_ipc_visualisation_visualisation3D_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_ipc_visualisation_visualisation3D_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_ipc_visualisation_visualisation3D_proto_goTypes = []any{
-	(*Particle3D)(nil), // 0: ipc.visualisation.particles3D.Particle3D
-	(*Empty)(nil),      // 1: ipc.visualisation.particles3D.Empty
+	(*Particle3D)(nil), // 0: ipc.visualisation.Particle3D
+	(*Empty)(nil),      // 1: ipc.visualisation.Empty
 }
 var file_ipc_visualisation_visualisation3D_proto_depIdxs = []int32{
-	0, // 0: ipc.visualisation.particles3D.Particle3DObserver.ObserveParticle:input_type -> ipc.visualisation.particles3D.Particle3D
-	1, // 1: ipc.visualisation.particles3D.Particle3DObserver.ObserveParticle:output_type -> ipc.visualisation.particles3D.Empty
+	0, // 0: ipc.visualisation.Particle3DObserver.ObserveParticle:input_type -> ipc.visualisation.Particle3D
+	1, // 1: ipc.visualisation.Particle3DObserver.ObserveParticle:output_type -> ipc.visualisation.Empty
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -217,13 +180,14 @@ func file_ipc_visualisation_visualisation3D_proto_init() {
 	if File_ipc_visualisation_visualisation3D_proto != nil {
 		return
 	}
+	file_ipc_visualisation_empty_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_ipc_visualisation_visualisation3D_proto_rawDesc), len(file_ipc_visualisation_visualisation3D_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

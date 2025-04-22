@@ -10,8 +10,8 @@ all: $(TARGET)
 	@echo $(TARGET)
 
 $(APIDIR)/%_api: $(PROTODIR)/%.proto
-	$(PROTOC) --go_out=. --go-grpc_out=. $<
-	python3 -m grpc_tools.protoc --proto_path=. --python_out=$(PYDIR) --grpc_python_out=$(PYDIR) ipc/visualisation/visualisation3D.proto
+	$(PROTOC) --proto_path=. --go_out=. --go-grpc_out=. $<
+	python3 -m grpc_tools.protoc --proto_path=. --python_out=$(PYDIR) --grpc_python_out=$(PYDIR) $<
 
 setup:
 	@go install google.golang.org/protobuf/cmd/protoc-gen-go@latest

@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package ipc.visualisation;
+
+option go_package = "./generated/ipc/visualisation_api/";
+
+message Empty {
+}

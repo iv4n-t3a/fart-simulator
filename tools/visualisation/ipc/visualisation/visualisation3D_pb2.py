@@ -12,37 +12,28 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from ipc.visualisation import empty_pb2 as ipc_dot_visualisation_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\'ipc/visualisation/visualisation3D.proto\x12\x1dipc.visualisation.particles3D\"\x93\x01\n\nParticle3D\x12\r\n\x05pos_x\x18\x01 \x01(\x01\x12\r\n\x05pos_y\x18\x02 \x01(\x01\x12\r\n\x05pos_z\x18\x03 \x01(\x01\x12\r\n\x05vel_x\x18\x04 \x01(\x01\x12\r\n\x05vel_y\x18\x05 \x01(\x01\x12\r\n\x05vel_z\x18\x06 \x01(\x01\x12\x0e\n\x06radius\x18\x07 \x01(\x01\x12\x0c\n\x04mass\x18\x08 \x01(\x01\x12\r\n\x05index\x18\t \x01(\x03\"\x07\n\x05\x45mpty2x\n\x12Particle3DObserver\x12\x62\n\x0fObserveParticle\x12).ipc.visualisation.particles3D.Particle3D\x1a$.ipc.visualisation.particles3D.EmptyB$Z\"./generated/ipc/visualisation_api/b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\'ipc/visualisation/visualisation3D.proto\x12\x11ipc.visualisation\x1a\x1dipc/visualisation/empty.proto\"\x93\x01\n\nParticle3D\x12\r\n\x05pos_x\x18\x01 \x01(\x01\x12\r\n\x05pos_y\x18\x02 \x01(\x01\x12\r\n\x05pos_z\x18\x03 \x01(\x01\x12\r\n\x05vel_x\x18\x04 \x01(\x01\x12\r\n\x05vel_y\x18\x05 \x01(\x01\x12\r\n\x05vel_z\x18\x06 \x01(\x01\x12\x0e\n\x06radius\x18\x07 \x01(\x01\x12\x0c\n\x04mass\x18\x08 \x01(\x01\x12\r\n\x05index\x18\t \x01(\x03\x32`\n\x12Particle3DObserver\x12J\n\x0fObserveParticle\x12\x1d.ipc.visualisation.Particle3D\x1a\x18.ipc.visualisation.EmptyB$Z\"./generated/ipc/visualisation_api/b\x06proto3')
 
 
 
 _PARTICLE3D = DESCRIPTOR.message_types_by_name['Particle3D']
-_EMPTY = DESCRIPTOR.message_types_by_name['Empty']
 Particle3D = _reflection.GeneratedProtocolMessageType('Particle3D', (_message.Message,), {
   'DESCRIPTOR' : _PARTICLE3D,
   '__module__' : 'ipc.visualisation.visualisation3D_pb2'
-  # @@protoc_insertion_point(class_scope:ipc.visualisation.particles3D.Particle3D)
+  # @@protoc_insertion_point(class_scope:ipc.visualisation.Particle3D)
   })
 _sym_db.RegisterMessage(Particle3D)
-
-Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), {
-  'DESCRIPTOR' : _EMPTY,
-  '__module__' : 'ipc.visualisation.visualisation3D_pb2'
-  # @@protoc_insertion_point(class_scope:ipc.visualisation.particles3D.Empty)
-  })
-_sym_db.RegisterMessage(Empty)
 
 _PARTICLE3DOBSERVER = DESCRIPTOR.services_by_name['Particle3DObserver']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'Z\"./generated/ipc/visualisation_api/'
-  _PARTICLE3D._serialized_start=75
-  _PARTICLE3D._serialized_end=222
-  _EMPTY._serialized_start=224
-  _EMPTY._serialized_end=231
-  _PARTICLE3DOBSERVER._serialized_start=233
-  _PARTICLE3DOBSERVER._serialized_end=353
+  _PARTICLE3D._serialized_start=94
+  _PARTICLE3D._serialized_end=241
+  _PARTICLE3DOBSERVER._serialized_start=243
+  _PARTICLE3DOBSERVER._serialized_end=339
 # @@protoc_insertion_point(module_scope)

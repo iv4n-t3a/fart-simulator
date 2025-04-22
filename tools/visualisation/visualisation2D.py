@@ -1,5 +1,6 @@
-import ipc.visualisation.visualisation3D_pb2 as visualisation3D_pb2
-import ipc.visualisation.visualisation3D_pb2_grpc as visualisation3D_pb2_grpc
+import ipc.visualisation.visualisation2D_pb2 as visualisation2D_pb2
+import ipc.visualisation.visualisation2D_pb2_grpc as visualisation2D_pb2_grpc
+import ipc.visualisation.empty_pb2 as empty_pb2
 
 import time
 import grpc
@@ -20,19 +21,17 @@ MARKER_SIZE = 100
 COLOR = 'b'
 
 
-class Visualisation(visualisation3D_pb2_grpc.Particle3DObserverServicer):
+class Visualisation(visualisation2D_pb2_grpc.Particle2DObserverServicer):
     def __init__(self):
         self.fig = plt.figure()
-        self.ax = self.fig.add_subplot(111, projection='3d')
+        self.ax = self.fig.add_subplot()
 
         self.ax.set_xlim(0.0, SIDE)
         self.ax.set_ylim(0.0, SIDE)
-        self.ax.set_zlim(0.0, SIDE)
 
 
-        self.particles_x = [0] * PARTICLES
-        self.particles_y = [0] * PARTICLES
-        self.particles_z = [0] * PARTICLES
+        self.particles_x = [-1.0] * PARTICLES
+        self.particles_y = [-1.0] * PARTICLES
 
         self._new_scatter()
 
@@ -46,9 +45,8 @@ class Visualisation(visualisation3D_pb2_grpc.Particle3DObserverServicer):
     def ObserveParticle(self, request, context):
         self.particles_x[request.index] = request.pos_x
         self.particles_y[request.index] = request.pos_y
-        self.particles_z[request.index] = request.pos_z
 
-        return visualisation3D_pb2.Empty()
+        return empty_pb2.Empty()
 
     def _update_plot(self, frame):
         if self.scatter is not None:
@@ -58,7 +56,7 @@ class Visualisation(visualisation3D_pb2_grpc.Particle3DObserverServicer):
         return self.scatter,
 
     def _new_scatter(self):
-        self.scatter = self.ax.scatter(self.particles_x, self.particles_y, self.particles_z, s=MARKER_SIZE, c=COLOR)
+        self.scatter = self.ax.scatter(self.particles_x, self.particles_y, s=MARKER_SIZE, c=COLOR)
 
 
     def run(self):
@@ -68,7 +66,7 @@ class Visualisation(visualisation3D_pb2_grpc.Particle3DObserverServicer):
 
 def serve(vis):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
-    visualisation3D_pb2_grpc.add_Particle3DObserverServicer_to_server(
+    visualisation2D_pb2_grpc.add_Particle2DObserverServicer_to_server(
         vis, server)
     server.add_insecure_port(PORT)
     server.start()

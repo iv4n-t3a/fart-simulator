@@ -3,10 +3,10 @@
 import grpc
 
 from ipc.visualisation import empty_pb2 as ipc_dot_visualisation_dot_empty__pb2
-from ipc.visualisation import visualisation3D_pb2 as ipc_dot_visualisation_dot_visualisation3D__pb2
+from ipc.visualisation import visualisation2D_pb2 as ipc_dot_visualisation_dot_visualisation2D__pb2
 
 
-class Particle3DObserverStub(object):
+class Particle2DObserverStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -16,13 +16,13 @@ class Particle3DObserverStub(object):
             channel: A grpc.Channel.
         """
         self.ObserveParticle = channel.unary_unary(
-                '/ipc.visualisation.Particle3DObserver/ObserveParticle',
-                request_serializer=ipc_dot_visualisation_dot_visualisation3D__pb2.Particle3D.SerializeToString,
+                '/ipc.visualisation.Particle2DObserver/ObserveParticle',
+                request_serializer=ipc_dot_visualisation_dot_visualisation2D__pb2.Particle2D.SerializeToString,
                 response_deserializer=ipc_dot_visualisation_dot_empty__pb2.Empty.FromString,
                 )
 
 
-class Particle3DObserverServicer(object):
+class Particle2DObserverServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def ObserveParticle(self, request, context):
@@ -32,21 +32,21 @@ class Particle3DObserverServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_Particle3DObserverServicer_to_server(servicer, server):
+def add_Particle2DObserverServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ObserveParticle': grpc.unary_unary_rpc_method_handler(
                     servicer.ObserveParticle,
-                    request_deserializer=ipc_dot_visualisation_dot_visualisation3D__pb2.Particle3D.FromString,
+                    request_deserializer=ipc_dot_visualisation_dot_visualisation2D__pb2.Particle2D.FromString,
                     response_serializer=ipc_dot_visualisation_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'ipc.visualisation.Particle3DObserver', rpc_method_handlers)
+            'ipc.visualisation.Particle2DObserver', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class Particle3DObserver(object):
+class Particle2DObserver(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
@@ -60,8 +60,8 @@ class Particle3DObserver(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/ipc.visualisation.Particle3DObserver/ObserveParticle',
-            ipc_dot_visualisation_dot_visualisation3D__pb2.Particle3D.SerializeToString,
+        return grpc.experimental.unary_unary(request, target, '/ipc.visualisation.Particle2DObserver/ObserveParticle',
+            ipc_dot_visualisation_dot_visualisation2D__pb2.Particle2D.SerializeToString,
             ipc_dot_visualisation_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

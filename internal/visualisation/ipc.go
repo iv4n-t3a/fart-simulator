@@ -15,10 +15,14 @@ type VisualisationObserver struct {
 	chanel chan *particle.Particle
 }
 
-func StartVisualisation() *VisualisationObserver {
+func StartVisualisation(dim int) *VisualisationObserver {
+	if dim != 2 && dim != 3 {
+		panic("Visualisation supports only 2D and 3D")
+	}
+
 	chanel := make(chan *particle.Particle, config.VisualisationChanelSize)
 
-	go chanelConsumer(chanel)
+	go chanelConsumer(chanel, dim)
 
 	return &VisualisationObserver{
 		chanel: chanel,
@@ -36,7 +40,7 @@ func (v *VisualisationObserver) Report() {
 	close(v.chanel)
 }
 
-func chanelConsumer(chanel chan *particle.Particle) {
+func chanelConsumer(chanel chan *particle.Particle, dim int) {
 	conn, err := grpc.NewClient(config.GrpcHost, grpc.WithTransportCredentials(insecure.NewCredentials()))
 
 	if err != nil {
@@ -50,22 +54,43 @@ func chanelConsumer(chanel chan *particle.Particle) {
 		}
 	}(conn)
 
-	client := visualisation_api.NewParticle3DObserverClient(conn)
+	if dim == 3 {
+		client := visualisation_api.NewParticle3DObserverClient(conn)
 
-	for particle := range chanel {
-		message := &visualisation_api.Particle3D{
-			PosX: particle.Pos.X(),
-			PosY: particle.Pos.Y(),
-			PosZ: particle.Pos.Z(),
+		for particle := range chanel {
+			message := &visualisation_api.Particle3D{
+				PosX: particle.Pos.X(),
+				PosY: particle.Pos.Y(),
+				PosZ: particle.Pos.Z(),
 
-			VelX: particle.Vel.X(),
-			VelY: particle.Vel.Y(),
-			VelZ: particle.Vel.Z(),
+				VelX: particle.Vel.X(),
+				VelY: particle.Vel.Y(),
+				VelZ: particle.Vel.Z(),
 
-			Radius: particle.Radius,
-			Mass:   particle.Mass,
-			Index:  particle.Index,
+				Radius: particle.Radius,
+				Mass:   particle.Mass,
+				Index:  particle.Index,
+			}
+			client.ObserveParticle(context.Background(), message)
 		}
-		client.ObserveParticle(context.Background(), message)
+	} else if dim == 2 {
+		client := visualisation_api.NewParticle2DObserverClient(conn)
+
+		for particle := range chanel {
+			message := &visualisation_api.Particle2D{
+				PosX: particle.Pos.X(),
+				PosY: particle.Pos.Y(),
+
+				VelX: particle.Vel.X(),
+				VelY: particle.Vel.Y(),
+
+				Radius: particle.Radius,
+				Mass:   particle.Mass,
+				Index:  particle.Index,
+			}
+			client.ObserveParticle(context.Background(), message)
+		}
+	} else {
+		panic("Visualisation supports only 2D and 3D")
 	}
 }

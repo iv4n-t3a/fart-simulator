@@ -1,8 +1,10 @@
 syntax = "proto3";
 
-package ipc.visualisation.particles3D;
+package ipc.visualisation;
 
 option go_package = "./generated/ipc/visualisation_api/";
+
+import "ipc/visualisation/empty.proto";
 
 message Particle3D {
   double pos_x = 1;
@@ -17,9 +19,6 @@ message Particle3D {
 	double mass = 8;
 
   int64 index = 9;
-}
-
-message Empty {
 }
 
 service Particle3DObserver {

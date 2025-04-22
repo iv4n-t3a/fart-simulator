@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Particle3DObserver_ObserveParticle_FullMethodName = "/ipc.visualisation.particles3D.Particle3DObserver/ObserveParticle"
+	Particle3DObserver_ObserveParticle_FullMethodName = "/ipc.visualisation.Particle3DObserver/ObserveParticle"
 )
 
 // Particle3DObserverClient is the client API for Particle3DObserver service.
@@ -108,7 +108,7 @@ func _Particle3DObserver_ObserveParticle_Handler(srv interface{}, ctx context.Co
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Particle3DObserver_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "ipc.visualisation.particles3D.Particle3DObserver",
+	ServiceName: "ipc.visualisation.Particle3DObserver",
 	HandlerType: (*Particle3DObserverServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

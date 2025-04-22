@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package ipc.visualisation;
+
+option go_package = "./generated/ipc/visualisation_api/";
+
+import "ipc/visualisation/empty.proto";
+
+message Particle2D {
+  double pos_x = 1;
+  double pos_y = 2;
+
+  double vel_x = 3;
+  double vel_y = 4;
+
+	double radius = 5;
+	double mass = 6;
+
+  int64 index = 7;
+}
+
+service Particle2DObserver {
+  rpc ObserveParticle(Particle2D) returns (Empty);
+}

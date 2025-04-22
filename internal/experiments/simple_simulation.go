@@ -9,11 +9,16 @@ import (
 	"github.com/iv4n-t3a/fart-simulator/internal/spawner"
 )
 
-func RunSimpleSimulation() {
+func RunSimpleSimulation(dim int) {
   side := 0.05
   time := 1.0
 
-	sides := []float64{side, side, side}
+	sides := make([]float64, dim)
+
+  for i := range sides {
+    sides[i] = side
+  }
+
 	containerInst := container.NewRectContainer(sides)
 	chunkFactory := kdtree_chunk.NewKDTreeChunkFactory()
 	spawnerInst := spawner.NewRectSpawner(1.0, config.Radius, config.Mass, *containerInst)
