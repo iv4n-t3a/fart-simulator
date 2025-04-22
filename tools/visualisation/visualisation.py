@@ -14,7 +14,9 @@ from matplotlib.animation import FuncAnimation
 
 PORT = 'localhost:6660'
 FPS = 60
-PARTICLES = 1000
+PARTICLES = 100
+SIDE = 0.05
+MARKER_SIZE = 30
 
 
 class Visualisation(visualisation3D_pb2_grpc.Particle3DObserverServicer):
@@ -22,11 +24,16 @@ class Visualisation(visualisation3D_pb2_grpc.Particle3DObserverServicer):
         self.fig = plt.figure()
         self.ax = self.fig.add_subplot(111, projection='3d')
 
+        self.ax.set_xlim(0.0, SIDE)
+        self.ax.set_ylim(0.0, SIDE)
+        self.ax.set_zlim(0.0, SIDE)
+
+
         self.particles_x = [0] * PARTICLES
         self.particles_y = [0] * PARTICLES
         self.particles_z = [0] * PARTICLES
 
-        self.scatter = self.ax.scatter(self.particles_x, self.particles_y, self.particles_z)
+        self.scatter = self.ax.scatter(self.particles_x, self.particles_y, self.particles_z, s=MARKER_SIZE)
 
         self.animation = FuncAnimation(
             self.fig,
@@ -46,7 +53,7 @@ class Visualisation(visualisation3D_pb2_grpc.Particle3DObserverServicer):
         if self.scatter is not None:
             self.scatter.remove()
 
-        self.scatter = self.ax.scatter(self.particles_x, self.particles_y, self.particles_z)
+        self.scatter = self.ax.scatter(self.particles_x, self.particles_y, self.particles_z, s=MARKER_SIZE)
         return self.scatter,
 
     def run(self):

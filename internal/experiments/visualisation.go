@@ -13,10 +13,10 @@ func RunVisualisation() {
 
 	sides := []float64{side, side, side}
 	containerInst := container.NewRectContainer(sides)
-	chunkFactory := naive_chunk.NewNaiveChunkFactory(0.0001)
-	spawnerInst := spawner.NewRectSpawner(1.0, *containerInst)
+	chunkFactory := naive_chunk.NewNaiveChunkFactory(0.0000001)
+	spawnerInst := spawner.NewRectSpawner(1.0, 0.00001, 1.0, *containerInst)
 
-	simulationInst := simulation.NewSingleChunkSimulation(1000, containerInst, chunkFactory, spawnerInst)
+	simulationInst := simulation.NewSingleChunkSimulation(100, containerInst, chunkFactory, spawnerInst)
 
   visualisation := visualisation.StartVisualisation()
   simulationInst.Observers().SubscribeParticle(visualisation)
