@@ -8,7 +8,7 @@ if __name__ == "__main__":
 
     dt_window = 0.01
 
-    states = utils.read_physics_states("../../data/collision_with_container_plot.json")
+    states = utils.read_physics_states("../../data/collision_with_container_plot_bin")
     states_dict = utils.physic_states_per_time(states)
 
     sorted_times = sorted(states_dict.keys())
