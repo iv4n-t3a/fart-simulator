@@ -1,6 +1,7 @@
+from typing import override
 import ipc.visualisation.visualisation2D_pb2 as visualisation2D_pb2
 import ipc.visualisation.visualisation2D_pb2_grpc as visualisation2D_pb2_grpc
-import ipc.visualisation.empty_pb2 as empty_pb2
+import ipc.visualisation.common_pb2 as common_pb2
 
 import time
 import grpc
@@ -18,7 +19,7 @@ FPS = 60
 PARTICLES = 100
 SIDE = 0.05
 MARKER_SIZE = 100
-COLOR = 'b'
+COLLISION_COLOR_PARAM_DECREASE = 0.01
 
 
 class Visualisation(visualisation2D_pb2_grpc.Particle2DObserverServicer):
@@ -29,9 +30,10 @@ class Visualisation(visualisation2D_pb2_grpc.Particle2DObserverServicer):
         self.ax.set_xlim(0.0, SIDE)
         self.ax.set_ylim(0.0, SIDE)
 
-
         self.particles_x = [-1.0] * PARTICLES
         self.particles_y = [-1.0] * PARTICLES
+
+        self.colision_color_param = [0.0] * PARTICLES
 
         self._new_scatter()
 
@@ -42,13 +44,22 @@ class Visualisation(visualisation2D_pb2_grpc.Particle2DObserverServicer):
             cache_frame_data=False
         )
 
+    @override
     def ObserveParticle(self, request, context):
         self.particles_x[request.index] = request.pos_x
         self.particles_y[request.index] = request.pos_y
 
-        return empty_pb2.Empty()
+        return common_pb2.Empty()
+
+    @override
+    def Collision(self, request, context):
+        self.colision_color_param[request.index] = 1.0
+        return common_pb2.Empty()
 
     def _update_plot(self, frame):
+        self.colision_color_param = [i - COLLISION_COLOR_PARAM_DECREASE if i >=
+                                     COLLISION_COLOR_PARAM_DECREASE else 0.0 for i in self.colision_color_param]
+
         if self.scatter is not None:
             self.scatter.remove()
 
@@ -56,8 +67,9 @@ class Visualisation(visualisation2D_pb2_grpc.Particle2DObserverServicer):
         return self.scatter,
 
     def _new_scatter(self):
-        self.scatter = self.ax.scatter(self.particles_x, self.particles_y, s=MARKER_SIZE, c=COLOR)
-
+        colors = plt.cm.coolwarm(self.colision_color_param)
+        self.scatter = self.ax.scatter(
+            self.particles_x, self.particles_y, s=MARKER_SIZE, color=colors)
 
     def run(self):
         plt.tight_layout()

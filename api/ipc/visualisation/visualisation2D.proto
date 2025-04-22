@@ -4,7 +4,7 @@ package ipc.visualisation;
 
 option go_package = "./generated/ipc/visualisation_api/";
 
-import "ipc/visualisation/empty.proto";
+import "ipc/visualisation/common.proto";
 
 message Particle2D {
   double pos_x = 1;
@@ -15,5 +15,5 @@ message Particle2D {
 
 service Particle2DObserver {
   rpc ObserveParticle(Particle2D) returns (Empty);
-  rpc Collision(Particle2D) returns (Empty);
+  rpc Collision(ParticleIndex) returns (Empty);
 }

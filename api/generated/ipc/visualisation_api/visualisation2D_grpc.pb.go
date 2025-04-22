@@ -28,7 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type Particle2DObserverClient interface {
 	ObserveParticle(ctx context.Context, in *Particle2D, opts ...grpc.CallOption) (*Empty, error)
-	Collision(ctx context.Context, in *Particle2D, opts ...grpc.CallOption) (*Empty, error)
+	Collision(ctx context.Context, in *ParticleIndex, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type particle2DObserverClient struct {
@@ -49,7 +49,7 @@ func (c *particle2DObserverClient) ObserveParticle(ctx context.Context, in *Part
 	return out, nil
 }
 
-func (c *particle2DObserverClient) Collision(ctx context.Context, in *Particle2D, opts ...grpc.CallOption) (*Empty, error) {
+func (c *particle2DObserverClient) Collision(ctx context.Context, in *ParticleIndex, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
 	err := c.cc.Invoke(ctx, Particle2DObserver_Collision_FullMethodName, in, out, cOpts...)
@@ -64,7 +64,7 @@ func (c *particle2DObserverClient) Collision(ctx context.Context, in *Particle2D
 // for forward compatibility.
 type Particle2DObserverServer interface {
 	ObserveParticle(context.Context, *Particle2D) (*Empty, error)
-	Collision(context.Context, *Particle2D) (*Empty, error)
+	Collision(context.Context, *ParticleIndex) (*Empty, error)
 	mustEmbedUnimplementedParticle2DObserverServer()
 }
 
@@ -78,7 +78,7 @@ type UnimplementedParticle2DObserverServer struct{}
 func (UnimplementedParticle2DObserverServer) ObserveParticle(context.Context, *Particle2D) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ObserveParticle not implemented")
 }
-func (UnimplementedParticle2DObserverServer) Collision(context.Context, *Particle2D) (*Empty, error) {
+func (UnimplementedParticle2DObserverServer) Collision(context.Context, *ParticleIndex) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Collision not implemented")
 }
 func (UnimplementedParticle2DObserverServer) mustEmbedUnimplementedParticle2DObserverServer() {}
@@ -121,7 +121,7 @@ func _Particle2DObserver_ObserveParticle_Handler(srv interface{}, ctx context.Co
 }
 
 func _Particle2DObserver_Collision_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Particle2D)
+	in := new(ParticleIndex)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -133,7 +133,7 @@ func _Particle2DObserver_Collision_Handler(srv interface{}, ctx context.Context,
 		FullMethod: Particle2DObserver_Collision_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(Particle2DObserverServer).Collision(ctx, req.(*Particle2D))
+		return srv.(Particle2DObserverServer).Collision(ctx, req.(*ParticleIndex))
 	}
 	return interceptor(ctx, in, info, handler)
 }

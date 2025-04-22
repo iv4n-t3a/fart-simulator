@@ -85,15 +85,15 @@ var File_ipc_visualisation_visualisation2D_proto protoreflect.FileDescriptor
 
 const file_ipc_visualisation_visualisation2D_proto_rawDesc = "" +
 	"\n" +
-	"'ipc/visualisation/visualisation2D.proto\x12\x11ipc.visualisation\x1a\x1dipc/visualisation/empty.proto\"L\n" +
+	"'ipc/visualisation/visualisation2D.proto\x12\x11ipc.visualisation\x1a\x1eipc/visualisation/common.proto\"L\n" +
 	"\n" +
 	"Particle2D\x12\x13\n" +
 	"\x05pos_x\x18\x01 \x01(\x01R\x04posX\x12\x13\n" +
 	"\x05pos_y\x18\x02 \x01(\x01R\x04posY\x12\x14\n" +
-	"\x05index\x18\x03 \x01(\x03R\x05index2\xa6\x01\n" +
+	"\x05index\x18\x03 \x01(\x03R\x05index2\xa9\x01\n" +
 	"\x12Particle2DObserver\x12J\n" +
-	"\x0fObserveParticle\x12\x1d.ipc.visualisation.Particle2D\x1a\x18.ipc.visualisation.Empty\x12D\n" +
-	"\tCollision\x12\x1d.ipc.visualisation.Particle2D\x1a\x18.ipc.visualisation.EmptyB$Z\"./generated/ipc/visualisation_api/b\x06proto3"
+	"\x0fObserveParticle\x12\x1d.ipc.visualisation.Particle2D\x1a\x18.ipc.visualisation.Empty\x12G\n" +
+	"\tCollision\x12 .ipc.visualisation.ParticleIndex\x1a\x18.ipc.visualisation.EmptyB$Z\"./generated/ipc/visualisation_api/b\x06proto3"
 
 var (
 	file_ipc_visualisation_visualisation2D_proto_rawDescOnce sync.Once
@@ -109,14 +109,15 @@ func file_ipc_visualisation_visualisation2D_proto_rawDescGZIP() []byte {
 
 var file_ipc_visualisation_visualisation2D_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_ipc_visualisation_visualisation2D_proto_goTypes = []any{
-	(*Particle2D)(nil), // 0: ipc.visualisation.Particle2D
-	(*Empty)(nil),      // 1: ipc.visualisation.Empty
+	(*Particle2D)(nil),    // 0: ipc.visualisation.Particle2D
+	(*ParticleIndex)(nil), // 1: ipc.visualisation.ParticleIndex
+	(*Empty)(nil),         // 2: ipc.visualisation.Empty
 }
 var file_ipc_visualisation_visualisation2D_proto_depIdxs = []int32{
 	0, // 0: ipc.visualisation.Particle2DObserver.ObserveParticle:input_type -> ipc.visualisation.Particle2D
-	0, // 1: ipc.visualisation.Particle2DObserver.Collision:input_type -> ipc.visualisation.Particle2D
-	1, // 2: ipc.visualisation.Particle2DObserver.ObserveParticle:output_type -> ipc.visualisation.Empty
-	1, // 3: ipc.visualisation.Particle2DObserver.Collision:output_type -> ipc.visualisation.Empty
+	1, // 1: ipc.visualisation.Particle2DObserver.Collision:input_type -> ipc.visualisation.ParticleIndex
+	2, // 2: ipc.visualisation.Particle2DObserver.ObserveParticle:output_type -> ipc.visualisation.Empty
+	2, // 3: ipc.visualisation.Particle2DObserver.Collision:output_type -> ipc.visualisation.Empty
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -129,7 +130,7 @@ func file_ipc_visualisation_visualisation2D_proto_init() {
 	if File_ipc_visualisation_visualisation2D_proto != nil {
 		return
 	}
-	file_ipc_visualisation_empty_proto_init()
+	file_ipc_visualisation_common_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

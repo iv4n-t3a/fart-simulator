@@ -29,7 +29,11 @@ func RunVisualisation(dim int) {
 	simulationInst := simulation.NewSingleChunkSimulation(count, containerInst, chunkFactory, spawnerInst)
 
 	visualisation := visualisation.StartVisualisation(dim)
+
 	simulationInst.Observers().SubscribeParticle(visualisation)
+	simulationInst.Observers().SubscribeCollision(visualisation)
+	simulationInst.Observers().SubscribeCollisionWithContainer(visualisation)
+
 	defer visualisation.Report()
 
 	simulationInst.Run(-1.0)

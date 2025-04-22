@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from ipc.visualisation import empty_pb2 as ipc_dot_visualisation_dot_empty__pb2
+from ipc.visualisation import common_pb2 as ipc_dot_visualisation_dot_common__pb2
 from ipc.visualisation import visualisation3D_pb2 as ipc_dot_visualisation_dot_visualisation3D__pb2
 
 
@@ -18,7 +18,12 @@ class Particle3DObserverStub(object):
         self.ObserveParticle = channel.unary_unary(
                 '/ipc.visualisation.Particle3DObserver/ObserveParticle',
                 request_serializer=ipc_dot_visualisation_dot_visualisation3D__pb2.Particle3D.SerializeToString,
-                response_deserializer=ipc_dot_visualisation_dot_empty__pb2.Empty.FromString,
+                response_deserializer=ipc_dot_visualisation_dot_common__pb2.Empty.FromString,
+                )
+        self.Collision = channel.unary_unary(
+                '/ipc.visualisation.Particle3DObserver/Collision',
+                request_serializer=ipc_dot_visualisation_dot_common__pb2.ParticleIndex.SerializeToString,
+                response_deserializer=ipc_dot_visualisation_dot_common__pb2.Empty.FromString,
                 )
 
 
@@ -31,13 +36,24 @@ class Particle3DObserverServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def Collision(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_Particle3DObserverServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ObserveParticle': grpc.unary_unary_rpc_method_handler(
                     servicer.ObserveParticle,
                     request_deserializer=ipc_dot_visualisation_dot_visualisation3D__pb2.Particle3D.FromString,
-                    response_serializer=ipc_dot_visualisation_dot_empty__pb2.Empty.SerializeToString,
+                    response_serializer=ipc_dot_visualisation_dot_common__pb2.Empty.SerializeToString,
+            ),
+            'Collision': grpc.unary_unary_rpc_method_handler(
+                    servicer.Collision,
+                    request_deserializer=ipc_dot_visualisation_dot_common__pb2.ParticleIndex.FromString,
+                    response_serializer=ipc_dot_visualisation_dot_common__pb2.Empty.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -62,6 +78,23 @@ class Particle3DObserver(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ipc.visualisation.Particle3DObserver/ObserveParticle',
             ipc_dot_visualisation_dot_visualisation3D__pb2.Particle3D.SerializeToString,
-            ipc_dot_visualisation_dot_empty__pb2.Empty.FromString,
+            ipc_dot_visualisation_dot_common__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Collision(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ipc.visualisation.Particle3DObserver/Collision',
+            ipc_dot_visualisation_dot_common__pb2.ParticleIndex.SerializeToString,
+            ipc_dot_visualisation_dot_common__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
