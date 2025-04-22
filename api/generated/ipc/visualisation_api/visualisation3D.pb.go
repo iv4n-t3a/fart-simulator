@@ -26,12 +26,7 @@ type Particle3D struct {
 	PosX          float64                `protobuf:"fixed64,1,opt,name=pos_x,json=posX,proto3" json:"pos_x,omitempty"`
 	PosY          float64                `protobuf:"fixed64,2,opt,name=pos_y,json=posY,proto3" json:"pos_y,omitempty"`
 	PosZ          float64                `protobuf:"fixed64,3,opt,name=pos_z,json=posZ,proto3" json:"pos_z,omitempty"`
-	VelX          float64                `protobuf:"fixed64,4,opt,name=vel_x,json=velX,proto3" json:"vel_x,omitempty"`
-	VelY          float64                `protobuf:"fixed64,5,opt,name=vel_y,json=velY,proto3" json:"vel_y,omitempty"`
-	VelZ          float64                `protobuf:"fixed64,6,opt,name=vel_z,json=velZ,proto3" json:"vel_z,omitempty"`
-	Radius        float64                `protobuf:"fixed64,7,opt,name=radius,proto3" json:"radius,omitempty"`
-	Mass          float64                `protobuf:"fixed64,8,opt,name=mass,proto3" json:"mass,omitempty"`
-	Index         int64                  `protobuf:"varint,9,opt,name=index,proto3" json:"index,omitempty"`
+	Index         int64                  `protobuf:"varint,4,opt,name=index,proto3" json:"index,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -87,41 +82,6 @@ func (x *Particle3D) GetPosZ() float64 {
 	return 0
 }
 
-func (x *Particle3D) GetVelX() float64 {
-	if x != nil {
-		return x.VelX
-	}
-	return 0
-}
-
-func (x *Particle3D) GetVelY() float64 {
-	if x != nil {
-		return x.VelY
-	}
-	return 0
-}
-
-func (x *Particle3D) GetVelZ() float64 {
-	if x != nil {
-		return x.VelZ
-	}
-	return 0
-}
-
-func (x *Particle3D) GetRadius() float64 {
-	if x != nil {
-		return x.Radius
-	}
-	return 0
-}
-
-func (x *Particle3D) GetMass() float64 {
-	if x != nil {
-		return x.Mass
-	}
-	return 0
-}
-
 func (x *Particle3D) GetIndex() int64 {
 	if x != nil {
 		return x.Index
@@ -133,18 +93,13 @@ var File_ipc_visualisation_visualisation3D_proto protoreflect.FileDescriptor
 
 const file_ipc_visualisation_visualisation3D_proto_rawDesc = "" +
 	"\n" +
-	"'ipc/visualisation/visualisation3D.proto\x12\x11ipc.visualisation\x1a\x1dipc/visualisation/empty.proto\"\xcc\x01\n" +
+	"'ipc/visualisation/visualisation3D.proto\x12\x11ipc.visualisation\x1a\x1dipc/visualisation/empty.proto\"a\n" +
 	"\n" +
 	"Particle3D\x12\x13\n" +
 	"\x05pos_x\x18\x01 \x01(\x01R\x04posX\x12\x13\n" +
 	"\x05pos_y\x18\x02 \x01(\x01R\x04posY\x12\x13\n" +
-	"\x05pos_z\x18\x03 \x01(\x01R\x04posZ\x12\x13\n" +
-	"\x05vel_x\x18\x04 \x01(\x01R\x04velX\x12\x13\n" +
-	"\x05vel_y\x18\x05 \x01(\x01R\x04velY\x12\x13\n" +
-	"\x05vel_z\x18\x06 \x01(\x01R\x04velZ\x12\x16\n" +
-	"\x06radius\x18\a \x01(\x01R\x06radius\x12\x12\n" +
-	"\x04mass\x18\b \x01(\x01R\x04mass\x12\x14\n" +
-	"\x05index\x18\t \x01(\x03R\x05index2`\n" +
+	"\x05pos_z\x18\x03 \x01(\x01R\x04posZ\x12\x14\n" +
+	"\x05index\x18\x04 \x01(\x03R\x05index2`\n" +
 	"\x12Particle3DObserver\x12J\n" +
 	"\x0fObserveParticle\x12\x1d.ipc.visualisation.Particle3D\x1a\x18.ipc.visualisation.EmptyB$Z\"./generated/ipc/visualisation_api/b\x06proto3"
 

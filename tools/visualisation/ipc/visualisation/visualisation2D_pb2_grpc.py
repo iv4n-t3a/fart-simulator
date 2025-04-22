@@ -20,6 +20,11 @@ class Particle2DObserverStub(object):
                 request_serializer=ipc_dot_visualisation_dot_visualisation2D__pb2.Particle2D.SerializeToString,
                 response_deserializer=ipc_dot_visualisation_dot_empty__pb2.Empty.FromString,
                 )
+        self.Collision = channel.unary_unary(
+                '/ipc.visualisation.Particle2DObserver/Collision',
+                request_serializer=ipc_dot_visualisation_dot_visualisation2D__pb2.Particle2D.SerializeToString,
+                response_deserializer=ipc_dot_visualisation_dot_empty__pb2.Empty.FromString,
+                )
 
 
 class Particle2DObserverServicer(object):
@@ -31,11 +36,22 @@ class Particle2DObserverServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def Collision(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_Particle2DObserverServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ObserveParticle': grpc.unary_unary_rpc_method_handler(
                     servicer.ObserveParticle,
+                    request_deserializer=ipc_dot_visualisation_dot_visualisation2D__pb2.Particle2D.FromString,
+                    response_serializer=ipc_dot_visualisation_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'Collision': grpc.unary_unary_rpc_method_handler(
+                    servicer.Collision,
                     request_deserializer=ipc_dot_visualisation_dot_visualisation2D__pb2.Particle2D.FromString,
                     response_serializer=ipc_dot_visualisation_dot_empty__pb2.Empty.SerializeToString,
             ),
@@ -61,6 +77,23 @@ class Particle2DObserver(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ipc.visualisation.Particle2DObserver/ObserveParticle',
+            ipc_dot_visualisation_dot_visualisation2D__pb2.Particle2D.SerializeToString,
+            ipc_dot_visualisation_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Collision(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ipc.visualisation.Particle2DObserver/Collision',
             ipc_dot_visualisation_dot_visualisation2D__pb2.Particle2D.SerializeToString,
             ipc_dot_visualisation_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,

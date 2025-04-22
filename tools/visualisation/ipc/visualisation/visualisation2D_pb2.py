@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 from ipc.visualisation import empty_pb2 as ipc_dot_visualisation_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\'ipc/visualisation/visualisation2D.proto\x12\x11ipc.visualisation\x1a\x1dipc/visualisation/empty.proto\"u\n\nParticle2D\x12\r\n\x05pos_x\x18\x01 \x01(\x01\x12\r\n\x05pos_y\x18\x02 \x01(\x01\x12\r\n\x05vel_x\x18\x03 \x01(\x01\x12\r\n\x05vel_y\x18\x04 \x01(\x01\x12\x0e\n\x06radius\x18\x05 \x01(\x01\x12\x0c\n\x04mass\x18\x06 \x01(\x01\x12\r\n\x05index\x18\x07 \x01(\x03\x32`\n\x12Particle2DObserver\x12J\n\x0fObserveParticle\x12\x1d.ipc.visualisation.Particle2D\x1a\x18.ipc.visualisation.EmptyB$Z\"./generated/ipc/visualisation_api/b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\'ipc/visualisation/visualisation2D.proto\x12\x11ipc.visualisation\x1a\x1dipc/visualisation/empty.proto\"9\n\nParticle2D\x12\r\n\x05pos_x\x18\x01 \x01(\x01\x12\r\n\x05pos_y\x18\x02 \x01(\x01\x12\r\n\x05index\x18\x03 \x01(\x03\x32\xa6\x01\n\x12Particle2DObserver\x12J\n\x0fObserveParticle\x12\x1d.ipc.visualisation.Particle2D\x1a\x18.ipc.visualisation.Empty\x12\x44\n\tCollision\x12\x1d.ipc.visualisation.Particle2D\x1a\x18.ipc.visualisation.EmptyB$Z\"./generated/ipc/visualisation_api/b\x06proto3')
 
 
 
@@ -33,7 +33,7 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'Z\"./generated/ipc/visualisation_api/'
   _PARTICLE2D._serialized_start=93
-  _PARTICLE2D._serialized_end=210
-  _PARTICLE2DOBSERVER._serialized_start=212
-  _PARTICLE2DOBSERVER._serialized_end=308
+  _PARTICLE2D._serialized_end=150
+  _PARTICLE2DOBSERVER._serialized_start=153
+  _PARTICLE2DOBSERVER._serialized_end=319
 # @@protoc_insertion_point(module_scope)

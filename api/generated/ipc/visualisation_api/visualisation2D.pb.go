@@ -25,11 +25,7 @@ type Particle2D struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PosX          float64                `protobuf:"fixed64,1,opt,name=pos_x,json=posX,proto3" json:"pos_x,omitempty"`
 	PosY          float64                `protobuf:"fixed64,2,opt,name=pos_y,json=posY,proto3" json:"pos_y,omitempty"`
-	VelX          float64                `protobuf:"fixed64,3,opt,name=vel_x,json=velX,proto3" json:"vel_x,omitempty"`
-	VelY          float64                `protobuf:"fixed64,4,opt,name=vel_y,json=velY,proto3" json:"vel_y,omitempty"`
-	Radius        float64                `protobuf:"fixed64,5,opt,name=radius,proto3" json:"radius,omitempty"`
-	Mass          float64                `protobuf:"fixed64,6,opt,name=mass,proto3" json:"mass,omitempty"`
-	Index         int64                  `protobuf:"varint,7,opt,name=index,proto3" json:"index,omitempty"`
+	Index         int64                  `protobuf:"varint,3,opt,name=index,proto3" json:"index,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -78,34 +74,6 @@ func (x *Particle2D) GetPosY() float64 {
 	return 0
 }
 
-func (x *Particle2D) GetVelX() float64 {
-	if x != nil {
-		return x.VelX
-	}
-	return 0
-}
-
-func (x *Particle2D) GetVelY() float64 {
-	if x != nil {
-		return x.VelY
-	}
-	return 0
-}
-
-func (x *Particle2D) GetRadius() float64 {
-	if x != nil {
-		return x.Radius
-	}
-	return 0
-}
-
-func (x *Particle2D) GetMass() float64 {
-	if x != nil {
-		return x.Mass
-	}
-	return 0
-}
-
 func (x *Particle2D) GetIndex() int64 {
 	if x != nil {
 		return x.Index
@@ -117,18 +85,15 @@ var File_ipc_visualisation_visualisation2D_proto protoreflect.FileDescriptor
 
 const file_ipc_visualisation_visualisation2D_proto_rawDesc = "" +
 	"\n" +
-	"'ipc/visualisation/visualisation2D.proto\x12\x11ipc.visualisation\x1a\x1dipc/visualisation/empty.proto\"\xa2\x01\n" +
+	"'ipc/visualisation/visualisation2D.proto\x12\x11ipc.visualisation\x1a\x1dipc/visualisation/empty.proto\"L\n" +
 	"\n" +
 	"Particle2D\x12\x13\n" +
 	"\x05pos_x\x18\x01 \x01(\x01R\x04posX\x12\x13\n" +
-	"\x05pos_y\x18\x02 \x01(\x01R\x04posY\x12\x13\n" +
-	"\x05vel_x\x18\x03 \x01(\x01R\x04velX\x12\x13\n" +
-	"\x05vel_y\x18\x04 \x01(\x01R\x04velY\x12\x16\n" +
-	"\x06radius\x18\x05 \x01(\x01R\x06radius\x12\x12\n" +
-	"\x04mass\x18\x06 \x01(\x01R\x04mass\x12\x14\n" +
-	"\x05index\x18\a \x01(\x03R\x05index2`\n" +
+	"\x05pos_y\x18\x02 \x01(\x01R\x04posY\x12\x14\n" +
+	"\x05index\x18\x03 \x01(\x03R\x05index2\xa6\x01\n" +
 	"\x12Particle2DObserver\x12J\n" +
-	"\x0fObserveParticle\x12\x1d.ipc.visualisation.Particle2D\x1a\x18.ipc.visualisation.EmptyB$Z\"./generated/ipc/visualisation_api/b\x06proto3"
+	"\x0fObserveParticle\x12\x1d.ipc.visualisation.Particle2D\x1a\x18.ipc.visualisation.Empty\x12D\n" +
+	"\tCollision\x12\x1d.ipc.visualisation.Particle2D\x1a\x18.ipc.visualisation.EmptyB$Z\"./generated/ipc/visualisation_api/b\x06proto3"
 
 var (
 	file_ipc_visualisation_visualisation2D_proto_rawDescOnce sync.Once
@@ -149,9 +114,11 @@ var file_ipc_visualisation_visualisation2D_proto_goTypes = []any{
 }
 var file_ipc_visualisation_visualisation2D_proto_depIdxs = []int32{
 	0, // 0: ipc.visualisation.Particle2DObserver.ObserveParticle:input_type -> ipc.visualisation.Particle2D
-	1, // 1: ipc.visualisation.Particle2DObserver.ObserveParticle:output_type -> ipc.visualisation.Empty
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	0, // 1: ipc.visualisation.Particle2DObserver.Collision:input_type -> ipc.visualisation.Particle2D
+	1, // 2: ipc.visualisation.Particle2DObserver.ObserveParticle:output_type -> ipc.visualisation.Empty
+	1, // 3: ipc.visualisation.Particle2DObserver.Collision:output_type -> ipc.visualisation.Empty
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

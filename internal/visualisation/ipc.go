@@ -63,12 +63,6 @@ func chanelConsumer(chanel chan *particle.Particle, dim int) {
 				PosY: particle.Pos.Y(),
 				PosZ: particle.Pos.Z(),
 
-				VelX: particle.Vel.X(),
-				VelY: particle.Vel.Y(),
-				VelZ: particle.Vel.Z(),
-
-				Radius: particle.Radius,
-				Mass:   particle.Mass,
 				Index:  particle.Index,
 			}
 			client.ObserveParticle(context.Background(), message)
@@ -81,11 +75,6 @@ func chanelConsumer(chanel chan *particle.Particle, dim int) {
 				PosX: particle.Pos.X(),
 				PosY: particle.Pos.Y(),
 
-				VelX: particle.Vel.X(),
-				VelY: particle.Vel.Y(),
-
-				Radius: particle.Radius,
-				Mass:   particle.Mass,
 				Index:  particle.Index,
 			}
 			client.ObserveParticle(context.Background(), message)

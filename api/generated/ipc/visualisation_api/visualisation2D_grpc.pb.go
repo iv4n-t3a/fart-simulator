@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	Particle2DObserver_ObserveParticle_FullMethodName = "/ipc.visualisation.Particle2DObserver/ObserveParticle"
+	Particle2DObserver_Collision_FullMethodName       = "/ipc.visualisation.Particle2DObserver/Collision"
 )
 
 // Particle2DObserverClient is the client API for Particle2DObserver service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type Particle2DObserverClient interface {
 	ObserveParticle(ctx context.Context, in *Particle2D, opts ...grpc.CallOption) (*Empty, error)
+	Collision(ctx context.Context, in *Particle2D, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type particle2DObserverClient struct {
@@ -47,11 +49,22 @@ func (c *particle2DObserverClient) ObserveParticle(ctx context.Context, in *Part
 	return out, nil
 }
 
+func (c *particle2DObserverClient) Collision(ctx context.Context, in *Particle2D, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, Particle2DObserver_Collision_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Particle2DObserverServer is the server API for Particle2DObserver service.
 // All implementations must embed UnimplementedParticle2DObserverServer
 // for forward compatibility.
 type Particle2DObserverServer interface {
 	ObserveParticle(context.Context, *Particle2D) (*Empty, error)
+	Collision(context.Context, *Particle2D) (*Empty, error)
 	mustEmbedUnimplementedParticle2DObserverServer()
 }
 
@@ -64,6 +77,9 @@ type UnimplementedParticle2DObserverServer struct{}
 
 func (UnimplementedParticle2DObserverServer) ObserveParticle(context.Context, *Particle2D) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ObserveParticle not implemented")
+}
+func (UnimplementedParticle2DObserverServer) Collision(context.Context, *Particle2D) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Collision not implemented")
 }
 func (UnimplementedParticle2DObserverServer) mustEmbedUnimplementedParticle2DObserverServer() {}
 func (UnimplementedParticle2DObserverServer) testEmbeddedByValue()                            {}
@@ -104,6 +120,24 @@ func _Particle2DObserver_ObserveParticle_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Particle2DObserver_Collision_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Particle2D)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Particle2DObserverServer).Collision(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Particle2DObserver_Collision_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Particle2DObserverServer).Collision(ctx, req.(*Particle2D))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Particle2DObserver_ServiceDesc is the grpc.ServiceDesc for Particle2DObserver service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +148,10 @@ var Particle2DObserver_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ObserveParticle",
 			Handler:    _Particle2DObserver_ObserveParticle_Handler,
+		},
+		{
+			MethodName: "Collision",
+			Handler:    _Particle2DObserver_Collision_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
