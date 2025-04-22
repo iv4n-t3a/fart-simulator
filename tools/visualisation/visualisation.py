@@ -1,57 +1,57 @@
-import threading
-from typing import AsyncIterator
-
-import time
 import ipc.visualisation.visualisation3D_pb2 as visualisation3D_pb2
 import ipc.visualisation.visualisation3D_pb2_grpc as visualisation3D_pb2_grpc
+
+import time
 import grpc
+import asyncio
+import threading
 from concurrent import futures
+import queue
+import numpy as np
+
 from matplotlib import pyplot as plt
 from matplotlib.animation import FuncAnimation
-from matplotlib.colors import Normalize
-import asyncio
-
 
 PORT = 'localhost:6660'
 FPS = 60
+PARTICLES = 1000
 
 
 class Visualisation(visualisation3D_pb2_grpc.Particle3DObserverServicer):
     def __init__(self):
         self.fig = plt.figure()
-        self.ax = self.fig.add_subplot(projection='3d')
-        self.particles_x = []
-        self.particles_y = []
-        self.particles_z = []
-        self.unupdated_iterations = 0
+        self.ax = self.fig.add_subplot(111, projection='3d')
+
+        self.particles_x = [0] * PARTICLES
+        self.particles_y = [0] * PARTICLES
+        self.particles_z = [0] * PARTICLES
+
+        self.scatter = self.ax.scatter(self.particles_x, self.particles_y, self.particles_z)
+
+        self.animation = FuncAnimation(
+            self.fig,
+            self._update_plot,
+            interval=1/FPS,
+            cache_frame_data=False
+        )
 
     def ObserveParticle(self, request, context):
-        if len(self.particles_x) < request.index:
-            self.particles_x += [0.0] * \
-                (request.index - len(self.particles_x) + 1)
-            self.particles_y += [0.0] * \
-                (request.index - len(self.particles_x) + 1)
-            self.particles_z += [0.0] * \
-                (request.index - len(self.particles_x) + 1)
-
         self.particles_x[request.index] = request.pos_x
         self.particles_y[request.index] = request.pos_y
         self.particles_z[request.index] = request.pos_z
 
         return visualisation3D_pb2.Empty()
 
-    def update(self, frame):
-        print('update')
-        # self.ln.set_offsets(
-        #     [self.particles_x, self.particles_y, self.particles_z])
-        return ''
+    def _update_plot(self, frame):
+        if self.scatter is not None:
+            self.scatter.remove()
+
+        self.scatter = self.ax.scatter(self.particles_x, self.particles_y, self.particles_z)
+        return self.scatter,
 
     def run(self):
-        self.animation = FuncAnimation(fig=self.ax, func=self.update)
+        plt.tight_layout()
         plt.show()
-        while True:
-            self.update()
-            time.sleep(1/FPS)
 
 
 def serve(vis):
@@ -66,13 +66,10 @@ def serve(vis):
 async def main():
     vis = Visualisation()
     serve_thread = threading.Thread(target=serve, args={vis})
-    vis_thread = threading.Thread(target=vis.run, args={})
-
     serve_thread.start()
-    vis_thread.start()
 
+    vis.run()
     serve_thread.join()
-    vis_thread.join()
 
 
 if __name__ == '__main__':
