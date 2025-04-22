@@ -3,3 +3,5 @@ simulator
 files
 .env
 *.json
+__pycache__
+data
