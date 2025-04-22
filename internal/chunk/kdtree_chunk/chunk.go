@@ -51,6 +51,7 @@ func (c *KDTreeChunk) Simulate(dt float64) {
 
 	for i := range c.particles {
 		p := c.particles[i].(*particle.Particle)
+		c.observers.ObserveParticle(p)
 		if c.container.ProcessCollision(p) {
 			c.observers.CollisionWithContainer(c.particles[i].(*particle.Particle))
 		}

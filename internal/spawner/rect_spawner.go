@@ -13,7 +13,7 @@ type RectSpawner struct {
 	sides       []float64
 }
 
-func NewRectSpawner(maxVelocity float64, c container.RectContainer) Spawner {
+func NewRectSpawner(maxVelocity float64, c container.HeatedRectContainer) Spawner {
 	return &RectSpawner{
 		maxVelocity: maxVelocity,
 		sides:       c.GetSides(),

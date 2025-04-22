@@ -5,7 +5,7 @@ PARTICLE_MASS = 1.5e-20
 BOLTZMANN_CONSTANT = 1.0 # TODO Fix for current simulation parameters
 
 if __name__ == "__main__":
-    states = utils.read_physics_states("data/particles_data.json")
+    states = utils.read_physics_states("data/particles_data_bin")
     states_dict = utils.physic_states_per_time(states)
 
     temperatures = []

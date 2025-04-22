@@ -8,16 +8,23 @@ import (
 type ParticleObserver struct {
 	timeSource *TimeObserver
 	data       []ParticleData
+	dtWindow   float64
+	lastUpdate float64
 }
 
-func NewParticleObserver(timeObserver *TimeObserver) *ParticleObserver {
+func NewParticleObserver(timeObserver *TimeObserver, dtWindow float64) *ParticleObserver {
 	return &ParticleObserver{
 		timeSource: timeObserver,
 		data:       make([]ParticleData, 0),
+		dtWindow:   dtWindow,
 	}
 }
 
 func (p *ParticleObserver) ObserveParticle(particle *particle.Particle) {
+	if p.timeSource.Duration-p.lastUpdate < p.dtWindow {
+		return
+	}
+	p.lastUpdate = p.timeSource.Duration
 	p.data = append(p.data, ParticleData{
 		particle.Pos.Coords(),
 		particle.Vel.Coords(),

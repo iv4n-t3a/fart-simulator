@@ -14,13 +14,17 @@ func RunSimpleSimulation() {
 	time := config.SimulationTime
 
 	sides := []float64{side, side, side}
-	containerInst := container.NewRectContainer(sides)
+	//containerInst := container.NewRectContainer(sides)
+	//containerInst := container.NewHeatedRectContainer(sides, 0.99999)
+	//chunkFactory := kdtree_chunk.NewKDTreeChunkFactory()
+	//spawnerInst := spawner.NewRectSpawner(1, *containerInst)
+
+	timeObserver := metrics.NewTimeObserver()
+	containerInst := container.NewHeatedRectContainer(sides, 0.9999, timeObserver, 1.0)
 	chunkFactory := kdtree_chunk.NewKDTreeChunkFactory()
 	spawnerInst := spawner.NewRectSpawner(1, *containerInst)
 
 	simulationInst := simulation.NewSingleChunkSimulation(1000, containerInst, chunkFactory, spawnerInst)
-
-	timeObserver := metrics.NewTimeObserver()
 	simulationInst.Observers().SubscribeTime(timeObserver)
 
 	dtAggregator := metrics.NewDtAggregator()
@@ -39,7 +43,7 @@ func RunSimpleSimulation() {
 	simulationInst.Observers().SubscribeCollisionWithContainer(containerAggregator)
 	defer containerAggregator.Report()
 
-	particleObserver := metrics.NewParticleObserver(timeObserver)
+	particleObserver := metrics.NewParticleObserver(timeObserver, 0.001)
 	simulationInst.Observers().SubscribeParticle(particleObserver)
 	defer particleObserver.Report()
 
