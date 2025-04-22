@@ -8,16 +8,14 @@ import (
 )
 
 var CLI struct {
-	Experiment string `short:"e" help:"Experiment to run"`
-	Dim        int    `short:"d" help:"Dimensions"`
+	Experiment string `short:"e" default:"simple-simulation" help:"Experiment to run"`
+	Dim        int    `short:"d" default:"3"                 help:"Dimensions"`
 }
 
 func main() {
 	kong.Parse(&CLI)
 
 	switch CLI.Experiment {
-	case "":
-		experiments.RunSimpleSimulation(CLI.Dim)
 	case "simple-simulation":
 		experiments.RunSimpleSimulation(CLI.Dim)
 	case "visualisation":
