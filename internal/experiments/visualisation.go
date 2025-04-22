@@ -1,6 +1,7 @@
 package experiments
 
 import (
+	// "github.com/iv4n-t3a/fart-simulator/internal/chunk/kdtree_chunk"
 	"github.com/iv4n-t3a/fart-simulator/internal/chunk/naive_chunk"
 	"github.com/iv4n-t3a/fart-simulator/internal/container"
 	"github.com/iv4n-t3a/fart-simulator/internal/simulation"
@@ -10,13 +11,19 @@ import (
 
 func RunVisualisation() {
 	side := 0.05
+  dt := 1e-7
+  max_velocity := 1.0
+  radius := 0.0001
+  mass := 1.0
+  count := 100
 
 	sides := []float64{side, side, side}
 	containerInst := container.NewRectContainer(sides)
-	chunkFactory := naive_chunk.NewNaiveChunkFactory(0.0000001)
-	spawnerInst := spawner.NewRectSpawner(1.0, 0.00001, 1.0, *containerInst)
+	chunkFactory := naive_chunk.NewNaiveChunkFactory(dt)
+	// chunkFactory := kdtree_chunk.NewKDTreeChunkFactory()
+	spawnerInst := spawner.NewRectSpawner(max_velocity, radius, mass, *containerInst)
 
-	simulationInst := simulation.NewSingleChunkSimulation(100, containerInst, chunkFactory, spawnerInst)
+	simulationInst := simulation.NewSingleChunkSimulation(count, containerInst, chunkFactory, spawnerInst)
 
   visualisation := visualisation.StartVisualisation()
   simulationInst.Observers().SubscribeParticle(visualisation)

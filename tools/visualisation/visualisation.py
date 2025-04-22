@@ -16,7 +16,8 @@ PORT = 'localhost:6660'
 FPS = 60
 PARTICLES = 100
 SIDE = 0.05
-MARKER_SIZE = 30
+MARKER_SIZE = 100
+COLOR = 'b'
 
 
 class Visualisation(visualisation3D_pb2_grpc.Particle3DObserverServicer):
@@ -33,7 +34,7 @@ class Visualisation(visualisation3D_pb2_grpc.Particle3DObserverServicer):
         self.particles_y = [0] * PARTICLES
         self.particles_z = [0] * PARTICLES
 
-        self.scatter = self.ax.scatter(self.particles_x, self.particles_y, self.particles_z, s=MARKER_SIZE)
+        self._new_scatter()
 
         self.animation = FuncAnimation(
             self.fig,
@@ -53,8 +54,12 @@ class Visualisation(visualisation3D_pb2_grpc.Particle3DObserverServicer):
         if self.scatter is not None:
             self.scatter.remove()
 
-        self.scatter = self.ax.scatter(self.particles_x, self.particles_y, self.particles_z, s=MARKER_SIZE)
+        self._new_scatter()
         return self.scatter,
+
+    def _new_scatter(self):
+        self.scatter = self.ax.scatter(self.particles_x, self.particles_y, self.particles_z, s=MARKER_SIZE, c=COLOR)
+
 
     def run(self):
         plt.tight_layout()
