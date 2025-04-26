@@ -10,18 +10,18 @@ import (
 )
 
 func RunSimpleSimulation(dim int) {
-  side := 0.05
-  time := 1.0
+	side := 0.05
+	time := 1.0
 
 	sides := make([]float64, dim)
 
-  for i := range sides {
-    sides[i] = side
-  }
+	for i := range sides {
+		sides[i] = side
+	}
 
-	containerInst := container.NewRectContainer(sides)
+	containerInst := container.NewSimpleRectContainer(sides)
 	chunkFactory := kdtree_chunk.NewKDTreeChunkFactory()
-	spawnerInst := spawner.NewRectSpawner(1.0, config.Radius, config.Mass, *containerInst)
+	spawnerInst := spawner.NewRectSpawner(1.0, config.Radius, config.Mass, containerInst)
 
 	simulationInst := simulation.NewSingleChunkSimulation(10000, containerInst, chunkFactory, spawnerInst)
 

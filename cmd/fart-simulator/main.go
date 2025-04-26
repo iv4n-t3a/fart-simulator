@@ -18,6 +18,8 @@ func main() {
 	switch CLI.Experiment {
 	case "simple-simulation":
 		experiments.RunSimpleSimulation(CLI.Dim)
+	case "shrinking-container":
+		experiments.RunShrinkingContainerSimulation(CLI.Dim)
 	case "visualisation":
 		experiments.RunVisualisation(CLI.Dim)
 	default:
