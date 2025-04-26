@@ -8,15 +8,15 @@ import (
 	"github.com/iv4n-t3a/fart-simulator/internal/vector"
 )
 
-type RectContainer struct {
+type SimpleRectContainer struct {
 	sides []float64
 }
 
-func NewRectContainer(sides []float64) *RectContainer {
-	return &RectContainer{sides: sides}
+func NewSimpleRectContainer(sides []float64) *SimpleRectContainer {
+	return &SimpleRectContainer{sides: sides}
 }
 
-func (c *RectContainer) IsInside(v vector.Vector) bool {
+func (c *SimpleRectContainer) IsInside(v vector.Vector) bool {
 	for i := range v.Dimensions() {
 		x := v.Dimension(i)
 		if x <= 0 || x >= c.sides[i] {
@@ -26,19 +26,23 @@ func (c *RectContainer) IsInside(v vector.Vector) bool {
 	return true
 }
 
-func (c *RectContainer) ProcessCollision(p *particle.Particle) bool {
+func (c *SimpleRectContainer) ProcessCollision(p *particle.Particle) bool {
 	detectedCollision := false
 	for i := range p.Pos.Dimensions() {
 		if p.Pos.Dimension(i) <= 0 || p.Pos.Dimension(i) >= c.sides[i] {
 			detectedCollision = true
-			p.Vel = p.Vel.SetDimension(-p.Vel.Dimension(i), i)
+			if p.Pos.Dimension(i) <= 0 {
+				p.Vel = p.Vel.SetDimension(math.Abs(p.Vel.Dimension(i)), i)
+			} else {
+				p.Vel = p.Vel.SetDimension(-math.Abs(p.Vel.Dimension(i)), i)
+			}
 		}
 	}
 
 	return detectedCollision
 }
 
-func (c *RectContainer) TimeBeforeCollision(p particle.Particle) float64 {
+func (c *SimpleRectContainer) TimeBeforeCollision(p particle.Particle) float64 {
 	res := math.Inf(1)
 
 	for i := range c.sides {
@@ -63,6 +67,6 @@ func (c *RectContainer) TimeBeforeCollision(p particle.Particle) float64 {
 	return res
 }
 
-func (c RectContainer) GetSides() []float64 {
+func (c *SimpleRectContainer) GetSides() []float64 {
 	return c.sides
 }

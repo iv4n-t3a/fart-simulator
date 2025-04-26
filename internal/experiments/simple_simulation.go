@@ -23,8 +23,9 @@ func RunSimpleSimulation(dim int) {
 		sides[i] = side
 	}
 
-	containerInst := container.NewRectContainer(sides)
+	containerInst := container.NewSimpleRectContainer(sides)
 	chunkFactory := kdtree_chunk.NewKDTreeChunkFactory()
+
 
 	velSpawner := velocity_spawner.NewNaiveVelocitySpawner(1.0, len(sides))
 	posGen := position_spawner.NewBoundedGenerator(sides)
