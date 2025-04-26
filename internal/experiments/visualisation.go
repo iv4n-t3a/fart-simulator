@@ -12,8 +12,6 @@ func RunVisualisation(dim int) {
 	side := 0.05
 	dt := 1e-7
 	max_velocity := 1.0
-	radius := 0.0001
-	mass := 1.0
 	count := 100
 
 	sides := make([]float64, dim)
@@ -24,11 +22,13 @@ func RunVisualisation(dim int) {
 
 	containerInst := container.NewRectContainer(sides)
 	chunkFactory := naive_chunk.NewNaiveChunkFactory(dt)
-	spawnerInst := spawner.NewRectSpawner(max_velocity, radius, mass, *containerInst)
+	spawnerInst := spawner.NewMoveSomeSpawner(max_velocity, 1, containerInst)
 
 	simulationInst := simulation.NewSingleChunkSimulation(count, containerInst, chunkFactory, spawnerInst)
 
 	visualisation := visualisation.StartVisualisation(dim)
+
+  visualisation.Init(simulationInst.Particles())
 
 	simulationInst.Observers().SubscribeParticle(visualisation)
 	simulationInst.Observers().SubscribeCollision(visualisation)

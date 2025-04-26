@@ -12,6 +12,7 @@ type MoveSomeSpawner struct {
 	innerSpawner Spawner
 	count        int
 	sides        []float64
+	nextIndex    int64
 }
 
 func NewMoveSomeSpawner(velocity float64, count int, c *container.RectContainer) Spawner {
@@ -19,10 +20,12 @@ func NewMoveSomeSpawner(velocity float64, count int, c *container.RectContainer)
 		innerSpawner: NewSameVelocitySpawner(velocity, *c),
 		count:        count,
 		sides:        c.GetSides(),
+		nextIndex:    0,
 	}
 }
 
 func (s *MoveSomeSpawner) SpawnParticle() particle.Particle {
+	s.nextIndex += 1
 	if s.count > 0 {
 		s.count -= 1
 		return s.innerSpawner.SpawnParticle()
@@ -32,5 +35,6 @@ func (s *MoveSomeSpawner) SpawnParticle() particle.Particle {
 		Vel:    vector.ZeroVector(len(s.sides)),
 		Radius: config.Radius,
 		Mass:   config.Mass,
+		Index:  s.nextIndex - 1,
 	}
 }

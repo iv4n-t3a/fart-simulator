@@ -33,6 +33,15 @@ func StartVisualisation(dim int) *VisualisationObserver {
 	}
 }
 
+func (v *VisualisationObserver) Init(p []particle.Particle) {
+	for i := range p {
+		v.channel <- &p[i]
+	}
+	for len(v.channel) != 0 {
+		// to cleanup channel before simulation runs
+	}
+}
+
 func (v *VisualisationObserver) ObserveParticle(p *particle.Particle) {
 	if len(v.channel) == cap(v.channel) {
 		return
