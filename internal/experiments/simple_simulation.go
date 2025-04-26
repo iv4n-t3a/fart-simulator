@@ -16,6 +16,7 @@ func RunSimpleSimulation(dim int) {
 	count := 10000
   radius := 1e-4
   mass := 1.5e-20
+  maxVelocity := 1.0
 
 	sides := make([]float64, dim)
 
@@ -27,7 +28,7 @@ func RunSimpleSimulation(dim int) {
 	chunkFactory := kdtree_chunk.NewKDTreeChunkFactory()
 
 
-	velSpawner := velocity_spawner.NewNaiveVelocitySpawner(1.0, len(sides))
+	velSpawner := velocity_spawner.NewNaiveVelocitySpawner(maxVelocity, len(sides))
 	posGen := position_spawner.NewBoundedGenerator(sides)
 
 	spawnerInst := spawner.NewSpawnerImpl(radius, mass, containerInst, posGen, velSpawner)

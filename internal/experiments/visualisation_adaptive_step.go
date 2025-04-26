@@ -12,7 +12,6 @@ import (
 
 func RunVisualisationWithAdaptiveStep(dim int) {
 	side := 0.05
-	// dt := 1e-7
 	startVelocity := 1.0
 	count := 1000
   radius := 1e-4
@@ -27,7 +26,7 @@ func RunVisualisationWithAdaptiveStep(dim int) {
 	velSpawner := velocity_spawner.NewMoveOneVelocitySpawner(startVelocity, len(sides))
 	posGen := position_spawner.NewBoundedGenerator(sides)
 
-	containerInst := container.NewRectContainer(sides)
+	containerInst := container.NewSimpleRectContainer(sides)
 	chunkFactory := kdtree_chunk.NewKDTreeChunkFactory()
 
 	spawnerInst := spawner.NewSpawnerImpl(radius, mass, containerInst, posGen, velSpawner)

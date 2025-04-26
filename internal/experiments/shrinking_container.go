@@ -5,6 +5,8 @@ import (
 	"github.com/iv4n-t3a/fart-simulator/internal/container"
 	"github.com/iv4n-t3a/fart-simulator/internal/simulation"
 	"github.com/iv4n-t3a/fart-simulator/internal/spawner"
+	position_spawner "github.com/iv4n-t3a/fart-simulator/internal/spawner/position"
+	velocity_spawner "github.com/iv4n-t3a/fart-simulator/internal/spawner/velocity"
 	"github.com/iv4n-t3a/fart-simulator/internal/visualisation"
 )
 
@@ -24,9 +26,12 @@ func RunShrinkingContainerSimulation(dim int) {
 		sides[i] = initialSide
 	}
 
-	containerInst := container.NewShrinkingRectContainer(sides, shrinkingSpeed, shrinkingResistance)
+
 	chunkFactory := naive_chunk.NewNaiveChunkFactory(dt)
-	spawnerInst := spawner.NewRectSpawner(maxVelocity, radius, mass, containerInst)
+	containerInst := container.NewShrinkingRectContainer(sides, shrinkingSpeed, shrinkingResistance)
+	velSpawner := velocity_spawner.NewNaiveVelocitySpawner(maxVelocity, len(sides))
+	posGen := position_spawner.NewBoundedGenerator(sides)
+	spawnerInst := spawner.NewSpawnerImpl(radius, mass, containerInst, posGen, velSpawner)
 	simulationInst := simulation.NewSingleChunkSimulation(count, containerInst, chunkFactory, spawnerInst)
 
 	visualisationInst := visualisation.StartVisualisation(dim)

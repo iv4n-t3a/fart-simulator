@@ -27,7 +27,7 @@ func RunVisualisation(dim int) {
 	velSpawner := velocity_spawner.NewMoveOneVelocitySpawner(startVelocity, len(sides))
 	posGen := position_spawner.NewBoundedGenerator(sides)
 
-	containerInst := container.NewRectContainer(sides)
+	containerInst := container.NewSimpleRectContainer(sides)
 	chunkFactory := naive_chunk.NewNaiveChunkFactory(dt)
 
 	spawnerInst := spawner.NewSpawnerImpl(radius, mass, containerInst, posGen, velSpawner)
