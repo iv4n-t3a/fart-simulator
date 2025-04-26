@@ -3,6 +3,7 @@ package container
 import (
 	"math"
 
+	"github.com/iv4n-t3a/fart-simulator/config"
 	"github.com/iv4n-t3a/fart-simulator/internal/particle"
 	"github.com/iv4n-t3a/fart-simulator/internal/vector"
 )
@@ -47,6 +48,10 @@ func (c *RectContainer) TimeBeforeCollision(p particle.Particle) float64 {
 		if x < p.Radius || x >= c.sides[i]-p.Radius {
 			return 0.0
 		}
+
+    if v < config.Eps {
+      continue
+    }
 
 		if v > 0 {
 			res = min((c.sides[i]-x-p.Radius)/v, res)

@@ -1,6 +1,7 @@
 package position_spawner
 
 import (
+	// "github.com/iv4n-t3a/fart-simulator/config"
 	"github.com/iv4n-t3a/fart-simulator/config"
 	"github.com/iv4n-t3a/fart-simulator/internal/container"
 	"github.com/iv4n-t3a/fart-simulator/internal/vector"
