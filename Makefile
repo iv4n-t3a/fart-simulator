@@ -11,8 +11,11 @@ test:
 	go mod tidy
 	go test -v ./test/...
 
+api:
+	make -C api
+
 $(TARGET): $(SOURCES)
 	go mod tidy
 	go build -o $(TARGET) cmd/fart-simulator/main.go
 
-.PHONY: build, run, test
+.PHONY: build, api, run, test

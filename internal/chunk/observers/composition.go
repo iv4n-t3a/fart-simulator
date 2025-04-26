@@ -1,6 +1,8 @@
 package observers
 
-import "github.com/iv4n-t3a/fart-simulator/internal/particle"
+import (
+	"github.com/iv4n-t3a/fart-simulator/internal/particle"
+)
 
 type ObserversComposition struct {
 	particleInsertedObservers       []ParticleInsertedObserver
