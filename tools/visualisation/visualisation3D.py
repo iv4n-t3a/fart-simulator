@@ -1,4 +1,3 @@
-from typing_extensions import override
 import ipc.visualisation.visualisation3D_pb2 as visualisation3D_pb2
 import ipc.visualisation.visualisation3D_pb2_grpc as visualisation3D_pb2_grpc
 import ipc.visualisation.common_pb2 as common_pb2
@@ -46,7 +45,6 @@ class Visualisation(visualisation3D_pb2_grpc.Particle3DObserverServicer):
             cache_frame_data=False
         )
 
-    @override
     def ObserveParticle(self, request, context):
         self.particles_x[request.index] = request.pos_x
         self.particles_y[request.index] = request.pos_y
@@ -54,7 +52,6 @@ class Visualisation(visualisation3D_pb2_grpc.Particle3DObserverServicer):
 
         return common_pb2.Empty()
 
-    @override
     def Collision(self, request, context):
         self.colision_color_param[request.index] = 1.0
         return common_pb2.Empty()
