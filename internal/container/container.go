@@ -6,7 +6,7 @@ import (
 )
 
 type Container interface {
-  IsInside(vector.Vector) bool
+	IsInside(vector.Vector) bool
 	ProcessCollision(*particle.Particle) bool
 	TimeBeforeCollision(particle.Particle) float64
 }
