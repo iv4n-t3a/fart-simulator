@@ -9,12 +9,12 @@ import (
 )
 
 func RunShrinkingContainerSimulation(dim int) {
-	initialSide := 0.1
+	initialSide := 0.1 * 0.5
 	dt := 1e-7
 	count := 100
 	mass := 1.0
 	radius := 0.0001
-	maxVelocity := 1.0
+	maxVelocity := 3.0
 
 	sides := make([]float64, dim)
 
@@ -22,7 +22,7 @@ func RunShrinkingContainerSimulation(dim int) {
 		sides[i] = initialSide
 	}
 
-	containerInst := container.NewShrinkingRectContainer(sides, 0.1)
+	containerInst := container.NewShrinkingRectContainer(sides, 2.0)
 	chunkFactory := naive_chunk.NewNaiveChunkFactory(dt)
 	spawnerInst := spawner.NewRectSpawner(maxVelocity, radius, mass, containerInst)
 	simulationInst := simulation.NewSingleChunkSimulation(count, containerInst, chunkFactory, spawnerInst)

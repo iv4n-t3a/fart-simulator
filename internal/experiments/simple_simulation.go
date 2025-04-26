@@ -21,7 +21,7 @@ func RunSimpleSimulation(dim int) {
 
 	containerInst := container.NewSimpleRectContainer(sides)
 	chunkFactory := kdtree_chunk.NewKDTreeChunkFactory()
-	spawnerInst := spawner.NewRectSpawner(1.0, config.Radius, config.Mass, *containerInst)
+	spawnerInst := spawner.NewRectSpawner(1.0, config.Radius, config.Mass, containerInst)
 
 	simulationInst := simulation.NewSingleChunkSimulation(10000, containerInst, chunkFactory, spawnerInst)
 
