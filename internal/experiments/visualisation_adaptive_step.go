@@ -1,7 +1,7 @@
 package experiments
 
 import (
-	"github.com/iv4n-t3a/fart-simulator/internal/chunk/naive_chunk"
+	"github.com/iv4n-t3a/fart-simulator/internal/chunk/kdtree_chunk"
 	"github.com/iv4n-t3a/fart-simulator/internal/container"
 	"github.com/iv4n-t3a/fart-simulator/internal/simulation"
 	"github.com/iv4n-t3a/fart-simulator/internal/spawner"
@@ -10,11 +10,10 @@ import (
 	"github.com/iv4n-t3a/fart-simulator/internal/visualisation"
 )
 
-func RunVisualisation(dim int) {
+func RunVisualisationWithAdaptiveStep(dim int) {
 	side := 0.05
-	dt := 1e-7
 	startVelocity := 1.0
-	count := 100
+	count := 1000
   radius := 1e-4
   mass := 1.5e-20
 
@@ -28,7 +27,7 @@ func RunVisualisation(dim int) {
 	posGen := position_spawner.NewBoundedGenerator(sides)
 
 	containerInst := container.NewSimpleRectContainer(sides)
-	chunkFactory := naive_chunk.NewNaiveChunkFactory(dt)
+	chunkFactory := kdtree_chunk.NewKDTreeChunkFactory()
 
 	spawnerInst := spawner.NewSpawnerImpl(radius, mass, containerInst, posGen, velSpawner)
 

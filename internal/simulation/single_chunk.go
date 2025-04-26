@@ -12,8 +12,9 @@ import (
 )
 
 type SingleChunkSimulation struct {
-	time  float64
-	chunk chunk.Chunk
+	time      float64
+	chunk     chunk.Chunk
+	particles []particle.Particle
 }
 
 func NewSingleChunkSimulation(particlesAmount int, container container.Container,
@@ -26,8 +27,9 @@ func NewSingleChunkSimulation(particlesAmount int, container container.Container
 	chunk := chunkFactory.NewChunk(container, particles)
 
 	return &SingleChunkSimulation{
-		time:  0.0,
-		chunk: chunk,
+		time:      0.0,
+		chunk:     chunk,
+		particles: particles,
 	}
 }
 
@@ -74,4 +76,8 @@ func (s *SingleChunkSimulation) runWithProgressBar(time float64) {
 			progressAdd -= time / 100
 		}
 	}
+}
+
+func (s *SingleChunkSimulation) Particles() []particle.Particle {
+	return s.particles
 }

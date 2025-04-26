@@ -22,6 +22,8 @@ func main() {
 		experiments.RunShrinkingContainerSimulation(CLI.Dim)
 	case "visualisation":
 		experiments.RunVisualisation(CLI.Dim)
+	case "adaptive-step":
+		experiments.RunVisualisationWithAdaptiveStep(CLI.Dim)
 	default:
 		panic(fmt.Sprintf("Unknown experiment %s, running default", CLI.Experiment))
 	}

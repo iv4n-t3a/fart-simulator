@@ -3,7 +3,9 @@ package container
 import (
 	"math"
 
+	"github.com/iv4n-t3a/fart-simulator/config"
 	"github.com/iv4n-t3a/fart-simulator/internal/particle"
+	"github.com/iv4n-t3a/fart-simulator/internal/vector"
 )
 
 type SimpleRectContainer struct {
@@ -12,6 +14,16 @@ type SimpleRectContainer struct {
 
 func NewSimpleRectContainer(sides []float64) *SimpleRectContainer {
 	return &SimpleRectContainer{sides: sides}
+}
+
+func (c *SimpleRectContainer) IsInside(v vector.Vector) bool {
+	for i := range v.Dimensions() {
+		x := v.Dimension(i)
+		if x <= 0 || x >= c.sides[i] {
+			return false
+		}
+	}
+	return true
 }
 
 func (c *SimpleRectContainer) ProcessCollision(p *particle.Particle) bool {
@@ -40,6 +52,10 @@ func (c *SimpleRectContainer) TimeBeforeCollision(p particle.Particle) float64 {
 		if x < p.Radius || x >= c.sides[i]-p.Radius {
 			return 0.0
 		}
+
+    if v < config.Eps {
+      continue
+    }
 
 		if v > 0 {
 			res = min((c.sides[i]-x-p.Radius)/v, res)
