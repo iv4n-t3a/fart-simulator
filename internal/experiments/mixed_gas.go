@@ -12,7 +12,8 @@ import (
 func RunMixedGasSimulation(dim int) {
 	side := 0.05
 	dt := 1e-7
-	startVelocity := 1.0
+	initialVelocity1 := 5.0
+	initialVelocity2 := 1.0
 	radius1 := 0.0001
 	radius2 := 0.0002
 	mass1 := 1.0
@@ -25,14 +26,14 @@ func RunMixedGasSimulation(dim int) {
 		sides[i] = side
 	}
 
-	velSpawner := velocity_spawner.NewMoveOneVelocitySpawner(startVelocity, len(sides))
-
+	velSpawner1 := velocity_spawner.NewNaiveVelocitySpawner(initialVelocity1, len(sides))
+	velSpawner2 := velocity_spawner.NewNaiveVelocitySpawner(initialVelocity2, len(sides))
 	containerInst := container.NewSimpleRectContainer(sides)
 	chunkFactory := naive_chunk.NewNaiveChunkFactory(dt)
 
 	spawnerInst := spawner.NewSeparatedPositionSpawner(
-		velSpawner,
-		velSpawner,
+		velSpawner1,
+		velSpawner2,
 		0.5,
 		0.5,
 		containerInst,
