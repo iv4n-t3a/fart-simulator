@@ -26,6 +26,8 @@ func main() {
 		experiments.RunVisualisationWithAdaptiveStep(CLI.Dim)
 	case "mixed-gas":
 		experiments.RunMixedGasSimulation(CLI.Dim)
+	case "hole":
+		experiments.RunWallWithHole(CLI.Dim)
 	default:
 		panic(fmt.Sprintf("Unknown experiment %s, running default", CLI.Experiment))
 	}
