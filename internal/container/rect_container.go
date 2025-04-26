@@ -4,6 +4,7 @@ import (
 	"math"
 
 	"github.com/iv4n-t3a/fart-simulator/internal/particle"
+	"github.com/iv4n-t3a/fart-simulator/internal/vector"
 )
 
 type RectContainer struct {
@@ -12,6 +13,16 @@ type RectContainer struct {
 
 func NewRectContainer(sides []float64) *RectContainer {
 	return &RectContainer{sides: sides}
+}
+
+func (c *RectContainer) IsInside(v vector.Vector) bool {
+	for i := range v.Dimensions() {
+		x := v.Dimension(i)
+		if x <= 0 || x >= c.sides[i] {
+			return false
+		}
+	}
+	return true
 }
 
 func (c *RectContainer) ProcessCollision(p *particle.Particle) bool {

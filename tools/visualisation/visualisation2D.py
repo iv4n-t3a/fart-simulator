@@ -16,7 +16,7 @@ from matplotlib.animation import FuncAnimation
 
 PORT = 'localhost:6660'
 FPS = 60
-PARTICLES = 100
+PARTICLES = 1000
 SIDE = 0.05
 MARKER_SIZE = 100
 COLLISION_COLOR_PARAM_DECREASE = 0.01
