@@ -33,12 +33,12 @@ func (c *RectContainer) TimeBeforeCollision(p particle.Particle) float64 {
 		v := p.Vel.Dimension(i)
 		x := p.Pos.Dimension(i)
 
-		if x < p.Radius || x >= c.sides[i] - p.Radius {
+		if x < p.Radius || x >= c.sides[i]-p.Radius {
 			return 0.0
 		}
 
 		if v > 0 {
-			res = min((c.sides[i] - x - p.Radius) / v, res)
+			res = min((c.sides[i]-x-p.Radius)/v, res)
 		} else {
 			res = min((p.Radius-x)/v, res)
 		}
