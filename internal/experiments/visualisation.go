@@ -22,9 +22,9 @@ func RunVisualisation(dim int) {
 		sides[i] = side
 	}
 
-	containerInst := container.NewRectContainer(sides)
+	containerInst := container.NewSimpleRectContainer(sides)
 	chunkFactory := naive_chunk.NewNaiveChunkFactory(dt)
-	spawnerInst := spawner.NewRectSpawner(max_velocity, radius, mass, *containerInst)
+	spawnerInst := spawner.NewRectSpawner(max_velocity, radius, mass, containerInst)
 
 	simulationInst := simulation.NewSingleChunkSimulation(count, containerInst, chunkFactory, spawnerInst)
 

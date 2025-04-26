@@ -6,15 +6,15 @@ import (
 	"github.com/iv4n-t3a/fart-simulator/internal/particle"
 )
 
-type RectContainer struct {
+type SimpleRectContainer struct {
 	sides []float64
 }
 
-func NewRectContainer(sides []float64) *RectContainer {
-	return &RectContainer{sides: sides}
+func NewSimpleRectContainer(sides []float64) *SimpleRectContainer {
+	return &SimpleRectContainer{sides: sides}
 }
 
-func (c *RectContainer) ProcessCollision(p *particle.Particle) bool {
+func (c *SimpleRectContainer) ProcessCollision(p *particle.Particle) bool {
 	detectedCollision := false
 	for i := range p.Pos.Dimensions() {
 		if p.Pos.Dimension(i) <= 0 || p.Pos.Dimension(i) >= c.sides[i] {
@@ -26,19 +26,19 @@ func (c *RectContainer) ProcessCollision(p *particle.Particle) bool {
 	return detectedCollision
 }
 
-func (c *RectContainer) TimeBeforeCollision(p particle.Particle) float64 {
+func (c *SimpleRectContainer) TimeBeforeCollision(p particle.Particle) float64 {
 	res := math.Inf(1)
 
 	for i := range c.sides {
 		v := p.Vel.Dimension(i)
 		x := p.Pos.Dimension(i)
 
-		if x < p.Radius || x >= c.sides[i] - p.Radius {
+		if x < p.Radius || x >= c.sides[i]-p.Radius {
 			return 0.0
 		}
 
 		if v > 0 {
-			res = min((c.sides[i] - x - p.Radius) / v, res)
+			res = min((c.sides[i]-x-p.Radius)/v, res)
 		} else {
 			res = min((p.Radius-x)/v, res)
 		}
@@ -47,6 +47,6 @@ func (c *RectContainer) TimeBeforeCollision(p particle.Particle) float64 {
 	return res
 }
 
-func (c RectContainer) GetSides() []float64 {
+func (c SimpleRectContainer) GetSides() []float64 {
 	return c.sides
 }
