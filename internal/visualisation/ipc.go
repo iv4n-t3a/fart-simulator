@@ -21,8 +21,8 @@ func StartVisualisation(dim int) *VisualisationObserver {
 		panic("Visualisation supports only 2D and 3D")
 	}
 
-	channel := make(chan *particle.Particle, config.VisualisationChanelSize)
-	collisions := make(chan int64, config.VisualisationChanelSize)
+	channel := make(chan *particle.Particle, config.VisualisationChannelSize)
+	collisions := make(chan int64, config.VisualisationChannelSize)
 
 	go channelConsumer(channel, dim)
 	go collisionConsumer(collisions, dim)
