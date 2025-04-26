@@ -19,7 +19,11 @@ func (c *SimpleRectContainer) ProcessCollision(p *particle.Particle) bool {
 	for i := range p.Pos.Dimensions() {
 		if p.Pos.Dimension(i) <= 0 || p.Pos.Dimension(i) >= c.sides[i] {
 			detectedCollision = true
-			p.Vel = p.Vel.SetDimension(-p.Vel.Dimension(i), i)
+			if p.Pos.Dimension(i) <= 0 {
+				p.Vel = p.Vel.SetDimension(math.Abs(p.Vel.Dimension(i)), i)
+			} else {
+				p.Vel = p.Vel.SetDimension(-math.Abs(p.Vel.Dimension(i)), i)
+			}
 		}
 	}
 
@@ -47,6 +51,6 @@ func (c *SimpleRectContainer) TimeBeforeCollision(p particle.Particle) float64 {
 	return res
 }
 
-func (c SimpleRectContainer) GetSides() []float64 {
+func (c *SimpleRectContainer) GetSides() []float64 {
 	return c.sides
 }
