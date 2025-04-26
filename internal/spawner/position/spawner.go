@@ -46,9 +46,9 @@ func (s *PositionSpawner) canInsert(pos vector.Vector, radius float64) bool {
 	if !s.container.IsInside(pos) {
 		return false
 	}
-  if s.count <= 1 {
-    return true
-  }
+	if s.count <= 1 {
+		return true
+	}
 	nearest := s.created.KNN(pos, 2)[1].(item)
-	return pos.Dist(nearest) >= nearest.radius+radius + config.Eps
+	return pos.Dist(nearest) >= nearest.radius+radius+config.Eps
 }
