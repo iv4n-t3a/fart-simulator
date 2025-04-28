@@ -1,5 +1,5 @@
 SOURCES := $(shell find . -type f -name *.go)
-TARGET := simulator
+TARGET := simulator.exe
 
 build: $(TARGET)
 

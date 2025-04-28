@@ -29,6 +29,24 @@ func TestNoCollision(t *testing.T) {
 	assert.False(t, wasCollision, "Extra collision detected")
 }
 
+func TestMovingStationaryCollision(t *testing.T) {
+	p1 := particle.Particle{
+		Pos:    vector.NewVector3D(0.0, 0.0, 0.0),
+		Vel:    vector.NewVector3D(1.0, 0.0, 0.0),
+		Radius: 1.0,
+		Mass:   1.0,
+	}
+	p2 := particle.Particle{
+		Pos:    vector.NewVector3D(1.414213562373, 1.414213562373, 0.0),
+		Vel:    vector.NewVector3D(0.0, 0.0, 0.0),
+		Radius: 1.0,
+		Mass:   1.0,
+	}
+
+	wasCollision := particle.ProcessCollision(&p1, &p2)
+	assert.True(t, wasCollision, "No collision detected")
+}
+
 func TestParticlesCollisionStressSameMass(t *testing.T) {
 	for range 100 {
 		p1 := particle.Particle{

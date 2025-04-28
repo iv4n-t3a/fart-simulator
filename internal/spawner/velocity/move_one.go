@@ -20,7 +20,7 @@ func (s *MoveOneVelocitySpawner) NextVelocity() vector.Vector {
 	if s.moved {
 		return vector.ZeroVector(s.dim)
 	} else {
-    s.moved = true
+		s.moved = true
 		return s.innerSpawner.NextVelocity()
 	}
 }
