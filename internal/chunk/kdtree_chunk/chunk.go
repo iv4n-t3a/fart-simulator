@@ -64,13 +64,11 @@ func (c *KDTreeChunk) Simulate(dt float64) {
 		prevVelN := nearest.Vel.Length()
 		if particle.ProcessCollision(p, nearest) {
 			c.observers.Collision(p, nearest)
-			if (math.Abs(prevVelP - p.Vel.Length())) < config.Eps {
-				fmt.Println(prevVelP)
-				panic("Speed didn't change")
+			if (math.Abs(prevVelP-p.Vel.Length())) < config.Eps && prevVelP > 0 {
+				fmt.Println("Speed P didn't change!:", prevVelP)
 			}
-			if (math.Abs(prevVelN - nearest.Vel.Length())) < config.Eps {
-				fmt.Println(prevVelN)
-				panic("Speed didn't change")
+			if (math.Abs(prevVelN-nearest.Vel.Length())) < config.Eps && prevVelN > 0 {
+				fmt.Println("Speed N didn't change!:", prevVelN)
 			}
 		}
 		c.maxVelocity = max(p.Vel.Length(), c.maxVelocity)

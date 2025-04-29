@@ -27,6 +27,9 @@ func (p Particle) KineticEnergy() float64 {
 }
 
 func ProcessCollision(p1 *Particle, p2 *Particle) bool {
+	if (p1.Vel.Length() + p2.Vel.Length()) < config.Eps {
+		return false
+	}
 	if p1.Pos.Dist(p2.Pos) > p1.Radius+p2.Radius {
 		return false
 	}

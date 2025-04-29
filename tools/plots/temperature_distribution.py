@@ -3,11 +3,11 @@ import os
 from matplotlib import pyplot as plt
 
 import utils
+import utils2
 
 if __name__ == "__main__":
-    print(os.getcwd())
-    position = 0.98
-    states = utils.read_physics_states("data/particles_data_bin")
+    position = 0.999
+    states = utils2.read_physics_states_bin2("data/particles_data_bin")
     states_dict = utils.physic_states_per_time(states)
 
     all_times = sorted(states_dict.keys())
@@ -17,8 +17,8 @@ if __name__ == "__main__":
 
     speeds = []
     for state in middle_states:
-        vx, vy, vz = state.velocity
-        speed = (vx**2 + vy**2 + vz**2)**0.5
+        vx, vy = state.velocity
+        speed = (vx**2 + vy**2)**0.5
         speeds.append(speed)
 
     print(sorted(speeds))

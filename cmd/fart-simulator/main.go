@@ -8,7 +8,7 @@ import (
 )
 
 var CLI struct {
-	Experiment string `short:"e" default:"single-particle" help:"Experiment to run"`
+	Experiment string `short:"e" default:"shrinking-file" help:"Experiment to run"`
 	Dim        int    `short:"d" default:"3"                 help:"Dimensions"`
 }
 
@@ -26,10 +26,14 @@ func main() {
 		experiments.RunVisualisationWithAdaptiveStep(CLI.Dim)
 	case "mixed-gas":
 		experiments.RunMixedGasSimulation(CLI.Dim)
-	case "hole":
+	case "hole-visualisation":
 		experiments.RunWallWithHole(CLI.Dim)
 	case "single-particle":
 		experiments.RunSingleParticleAcceleration(CLI.Dim)
+	case "hole":
+		experiments.RunHole(CLI.Dim)
+	case "shrinking-file":
+		experiments.RunShrinkingContainerFile(CLI.Dim)
 	default:
 		panic(fmt.Sprintf("Unknown experiment %s, running default", CLI.Experiment))
 	}

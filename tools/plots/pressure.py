@@ -2,11 +2,11 @@ import utils
 import matplotlib.pyplot as plt
 
 if __name__ == "__main__":
-    PARTICLE_MASS = 1.5e-10
-    side_length = 0.05
+    PARTICLE_MASS = 6.6335e-26
+    side_length = 80e-9
     wall_area = 6 * side_length ** 2
 
-    dt_window = 0.01
+    dt_window = 5e-13 / 500000000000
 
     states = utils.read_physics_states("../../data/collision_with_container_plot_bin")
     states_dict = utils.physic_states_per_time(states)

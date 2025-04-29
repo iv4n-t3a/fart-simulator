@@ -26,6 +26,7 @@ func (c *CollisionWithContainerAggregatorObserver) CollisionWithContainer(p *par
 }
 
 func (c *CollisionWithContainerAggregatorObserver) Report() {
+	fmt.Println("Reporting, len=", len(c.data))
 	err := WriteParticleDataToBinary("data/collision_with_container_plot_bin", c.data)
 	if err != nil {
 		fmt.Println("Error writing particles data")
